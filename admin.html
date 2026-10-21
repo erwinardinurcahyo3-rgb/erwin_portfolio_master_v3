@@ -798,15 +798,6 @@
           <div id="admin-login-error" class="auth-error"></div>
         </div>
 
-        <div class="auth-tip-box">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-amber); flex-shrink: 0;">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          <div>Sandi Standar: <strong>admin123</strong></div>
-        </div>
-
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
             <span>Masuk ke Dasbor Pengelola</span>
@@ -1611,7 +1602,7 @@
             updateAuthScreenView();
             showToast('Selamat datang, Admin Erwin! Dasbor CMS siap digunakan.', 'success');
           } else {
-            adminLoginError.textContent = 'Kata sandi salah. Sandi standar adalah admin123';
+            adminLoginError.textContent = 'Kata sandi salah. Silakan coba kembali.';
             if (authCard) {
               authCard.classList.remove('shake');
               void authCard.offsetWidth;
