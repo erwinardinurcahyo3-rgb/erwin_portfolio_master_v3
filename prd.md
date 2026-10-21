@@ -113,3 +113,10 @@ ZONA BAWAH: MASTER CONTEXT & LOGIKA SISTEM TERKINI (LIVING CONTEXT)
     * Penambahan penanda versi data (`dataVersion: '2.3.0'`) pada `js/data.js`, `admin.html`, dan `index.html`.
     * Otomatisasi pembersihan cache usang browser (`localStorage['erwin_portfolio_master_v3']`) sehingga data CV baru langsung aktif tanpa terhalang cache lama.
     * Penyempurnaan modul 1-Klik Publikasi GitHub REST API pada `admin.html` agar mengunggah dataset terbaru ke repositori.
+  - `v2.4.0` (Penyempurnaan 5 Kendala UI/UX & Fungsional Berdasarkan Laporan Pengguna):
+    * **Gambar 1:** Menghapus floating admin toolbar `#admin-toolbar-card` dari `index.html` dan memusatkan seluruh administrasi ke portal mandiri `admin.html`.
+    * **Gambar 2:** Memperbaiki form kontak dengan tombol aksi ganda: Kirim via WhatsApp Web/App langsung (`wa.me`) dan Kirim via Email / Gmail Web di tab baru.
+    * **Gambar 3:** Menerapkan sistem ScrollSpy pintar untuk sinkronisasi otomatis indikator menu aktif pada desktop dan mobile.
+    * **Gambar 4:** Mencegah autofill browser pada kotak pencarian dokumen (`autocomplete="off"`), serta menambahkan rendering thumbnail foto sertifikat asli pada kartu dokumen dan penampil penuh pada modal viewer.
+    * **Gambar 5:** Mengganti pembuatan dummy PDF dengan berkas fisik asli `docs/CV_Erwin_Ardi_Nurcahyo_2026.pdf` (299 KB) sehingga CV dapat dibuka sempurna di Adobe Acrobat tanpa Error 14.
+
