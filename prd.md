@@ -82,8 +82,8 @@ ZONA BAWAH: MASTER CONTEXT & LOGIKA SISTEM TERKINI (LIVING CONTEXT)
 ================================================================================
 - **Status Arsitektur Aktif:** Standalone Dual-Page Web Architecture (Portofolio Publik `index.html` + Dasbor CMS Mandiri `admin.html` di Tab Baru dengan Cross-Tab Real-time Storage Sync & GitHub REST API Sync Connector).
 - **Pemilik Portofolio:** Erwin Ardi Nurcahyo (Safety Officer & Operations Specialist).
-- **Format Data Aktif:** Structured Data di `js/data.js` & `localStorage['erwin_portfolio_master_v2']`.
-- **Logika Keamanan Aktif:** Standalone Admin Authentication (`admin.html`), PIN Document Locker (DOC-EAN-003 IBPR), Privacy Redaction Preview Watermarking, Safe Client-Side GitHub Token Storage.
+- **Format Data Aktif:** Structured Data di `js/data.js` & `localStorage['erwin_portfolio_master_v3']`.
+- **Logika Keamanan Aktif:** Standalone Admin Authentication (`admin.html`), PIN Document Locker (DOC-EAN-007 IBPR), Privacy Redaction Preview Watermarking, Safe Client-Side GitHub Token Storage.
 - **Log Pembaruan Resmi:**
   - `v1.0.0` (Inisialisasi): Spesifikasi portofolio awal ZettBOT.
   - `v1.2.0` (Hotfix GitHub Pages): Penyatuan all-in-one CSS & JS ke dalam index.html untuk mengeliminasi 404.
@@ -101,3 +101,11 @@ ZONA BAWAH: MASTER CONTEXT & LOGIKA SISTEM TERKINI (LIVING CONTEXT)
     * Dasbor CMS halaman penuh (*Full-Page Dashboard*) yang lapang, profesional, dan nyaman digunakan di PC maupun HP.
     * Penambahan integrasi event listener `storage` pada `index.html` sehingga seluruh pengeditan di tab `admin.html` langsung tersinkronisasi otomatis secara real-time ke halaman portofolio tanpa perlu refresh manual.
     * Tombol pintas `[🌐 Portofolio Live ↗]` di bilah atas `admin.html` untuk memudahkan pemilik beralih antar tab.
+  - `v2.2.1` (Hardening Keamanan & Privasi Login):
+    * Menghapus seluruh kotak tampilan petunjuk sandi bawaan pada layar login `admin.html` dan `index.html`.
+    * Mengganti pesan kesalahan login menjadi pesan generik aman tanpa membocorkan kata sandi.
+  - `v2.3.0` (Sinkronisasi Penuh Biodata Sesuai CV Resmi Erwin Ardi Nurcahyo):
+    * Penyelarasan ringkasan profesional: Lulusan S1 Sistem Informasi STMIK Indonesia Banjarmasin (IPK 3,44), inspeksi harian site BIB, observasi hazard/near miss, sidak mingguan ke 19 mitra kerja, serta pelaporan Link Tracker OHS Support, Zero Harm 2.0, dan PICA.
+    * Pembaruan 3 riwayat karier lengkap dengan seluruh butir tanggung jawab resmi: Safety Officer PT ERM di site PT BIB, Admin Commercial PT Aviko di PT SSB, dan Staf Magang Pengarsipan & IT BPS Banjarmasin.
+    * Restrukturisasi 7 kategori keahlian lengkap: Keselamatan Lapangan, Pelaporan K3, Data & Pelaporan (KNIME, Looker Studio), ERP SAP, IT & Web (PHP/MySQL), Desain, dan Soft Skills.
+    * Pembaruan 7 sertifikasi resmi otentik dari LSP Telematika BNSP, FMS Miners Education, dan Pelatihan Internal PT Borneo Indobara (BIB).
