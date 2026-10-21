@@ -1710,15 +1710,15 @@
           </svg>
         </button>
 
-        <!-- Tombol Portal Admin -->
-        <button type="button" class="btn btn-secondary btn-sm" id="btn-admin-portal" title="Akses Pengelola Portofolio">
+        <!-- Tombol Portal Admin (Buka Tab Baru) -->
+        <a href="admin.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="btn-admin-portal" title="Buka Portal Pengelola Portofolio di Tab Baru">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
-          <span id="admin-btn-text">Portal Admin</span>
-        </button>
+          <span id="admin-btn-text">Portal Admin ↗</span>
+        </a>
 
         <a href="#kontak" class="btn btn-primary btn-sm" id="cta-nav-contact">
           <span>Hubungi Saya</span>
@@ -1746,7 +1746,7 @@
     <a href="#proyek" class="mobile-nav-link">Proyek & K3</a>
     <a href="#dokumen" class="mobile-nav-link">Dokumen Resmi</a>
     <a href="#kontak" class="mobile-nav-link">Kontak Langsung</a>
-    <a href="javascript:void(0)" class="mobile-nav-link" id="mobile-admin-link">Portal Admin (Kelola Berkas)</a>
+    <a href="admin.html" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" id="mobile-admin-link">Portal Admin (Buka Tab Baru) ↗</a>
   </div>
 
   <main>
@@ -3306,7 +3306,7 @@
           adminToolbarCard.style.display = isAdmin ? 'flex' : 'none';
         }
         if (adminBtnText) {
-          adminBtnText.textContent = isAdmin ? 'Admin Aktif' : 'Portal Admin';
+          adminBtnText.textContent = isAdmin ? 'Admin Aktif ↗' : 'Portal Admin ↗';
         }
       }
 
@@ -3687,16 +3687,9 @@
       const btnTopGithubSync = document.getElementById('btn-top-github-sync');
       const btnAdminLogout = document.getElementById('btn-admin-logout');
 
-      function triggerAdminAction() {
-        if (isAdmin) {
-          openCmsModal('tab-profil');
-        } else {
-          adminLoginError.textContent = '';
-          adminPassInput.value = '';
-          adminLoginModal.classList.add('active');
-          document.body.style.overflow = 'hidden';
-          setTimeout(() => adminPassInput.focus(), 150);
-        }
+      function triggerAdminAction(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        window.open('admin.html', '_blank');
       }
 
       if (btnAdminPortal) btnAdminPortal.addEventListener('click', triggerAdminAction);
@@ -3716,8 +3709,8 @@
             adminLoginModal.classList.remove('active');
             updateAdminUI();
             renderDocumentsList();
-            showToast('Selamat datang, Admin Erwin! Membuka Dasbor CMS...', 'success');
-            setTimeout(() => openCmsModal('tab-profil'), 200);
+            showToast('Selamat datang, Admin Erwin! Membuka Dasbor CMS di tab baru...', 'success');
+            setTimeout(() => window.open('admin.html', '_blank'), 200);
           } else {
             adminLoginError.textContent = 'Kata sandi salah. Sandi standar adalah admin123';
             triggerShake(adminLoginModal.querySelector('.modal-container'));
@@ -3735,24 +3728,34 @@
         });
       }
 
+      // SINKRONISASI OTOMATIS LINTAS TAB (Cross-Tab Real-time Storage Sync)
+      window.addEventListener('storage', (e) => {
+        if (e.key === STORAGE_KEY_STATE) {
+          CURRENT_STATE = loadAppState();
+          renderAllWebsite();
+          showToast('Konten portofolio diperbarui secara langsung dari Tab Admin!', 'info');
+        } else if (e.key === STORAGE_KEY_ADMIN) {
+          isAdmin = localStorage.getItem(STORAGE_KEY_ADMIN) === 'true';
+          updateAdminUI();
+          renderDocumentsList();
+        }
+      });
+
       // ============================================================================
       // 7. DASBOR CMS TERPADU (TAB ROUTING & FORM SYNC)
       // ============================================================================
       function openCmsModal(defaultTab = 'tab-profil') {
-        populateCmsForms();
-        switchCmsTab(defaultTab);
-        adminCmsModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        window.open(`admin.html#${defaultTab}`, '_blank');
       }
 
       function closeCmsModal() {
-        adminCmsModal.classList.remove('active');
+        if (adminCmsModal) adminCmsModal.classList.remove('active');
         document.body.style.overflow = '';
       }
 
       if (btnCloseCmsModal) btnCloseCmsModal.addEventListener('click', closeCmsModal);
-      if (btnOpenCmsDash) btnOpenCmsDash.addEventListener('click', () => openCmsModal('tab-profil'));
-      if (btnTopGithubSync) btnTopGithubSync.addEventListener('click', () => openCmsModal('tab-github'));
+      if (btnOpenCmsDash) btnOpenCmsDash.addEventListener('click', () => window.open('admin.html', '_blank'));
+      if (btnTopGithubSync) btnTopGithubSync.addEventListener('click', () => window.open('admin.html', '_blank'));
 
       // Tab switcher
       const cmsTabBtns = document.querySelectorAll('.cms-tab-btn');

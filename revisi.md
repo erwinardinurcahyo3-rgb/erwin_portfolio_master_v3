@@ -1,26 +1,28 @@
 # DOKUMEN REVISI (revisi.md)
 ================================================================================
-STATUS: SELESAI DITERAPKAN (ALL CHANGES EXECUTED & VERIFIED)
-KODE REVISI : REV-202610-002 (v2.1.0)
-TANGGAL     : 9 Oktober 2026
+STATUS      : SELESAI DITERAPKAN (ALL CHANGES EXECUTED & VERIFIED)
+KODE REVISI : REV-202610-003 (v2.2.0)
+TANGGAL     : 21 Oktober 2026
 ARSITEK     : ZettBOT by Zettbos
 ================================================================================
 
-Seluruh rencana implementasi revisi Dasbor Full CMS dan Integrasi GitHub API telah berhasil dieksekusi secara presisi dan disinkronkan ke zona bawah berkas `prd.md` (bagian Living Context v2.1.0):
+Seluruh rencana implementasi revisi pemisahan Portal Login Admin & Dasbor CMS ke Tab Baru telah berhasil dieksekusi secara presisi dan disinkronkan ke zona bawah berkas `prd.md` (bagian Living Context v2.2.0):
 
-1. **Dasbor CMS Terpadu (Content Management System):**
-   - **Tab Profil & Foto:** Pengguna dapat mengubah nama, headline, bio, kontak, serta mengunggah foto profil baru langsung dari galeri perangkat HP atau laptop (otomatis terkompresi dan dipratinjau).
-   - **Tab Pengalaman Kerja:** Menambah, mengedit, dan menghapus riwayat karier (PT BIB, PT SSB, BPS Banjarmasin, atau pengalaman baru).
-   - **Tab Proyek STAR:** Menambah, mengedit, dan menghapus proyek lapangan metode STAR.
-   - **Tab Berkas & Dokumen:** Menambah berkas baru dengan melampirkan salinan PDF atau foto sertifikat asli dari perangkat, mengedit informasi berkas, dan menghapus berkas.
+1. **Halaman Mandiri Baru (`admin.html`):**
+   - **Layar Login Mandiri & Bersih:** Dilengkapi ikon keamanan, input kata sandi dengan tombol intip/sembunyikan sandi, animasi shake jika sandi salah, dan petunjuk sandi bawaan (`admin123`).
+   - **Dasbor CMS Halaman Penuh (*Full-Page Dashboard*):** Area kerja yang lapang dan profesional tanpa terbatasi kotak modal pop-up.
+   - **Ringkasan Metrik Dinamis:** Kartu ringkasan total pengalaman kerja, proyek STAR, dan berkas/dokumen.
+   - **Navigasi 5 Tab Utama:**
+     * *Tab 1 (Profil & Foto):* Form data pribadi + uploader foto kompresi Base64 otomatis dari galeri perangkat.
+     * *Tab 2 (Pengalaman Kerja):* Tabel interaktif dengan aksi Tambah, Edit, dan Hapus riwayat karier.
+     * *Tab 3 (Proyek STAR):* Tabel interaktif dengan aksi Tambah, Edit, dan Hapus proyek lapangan metode STAR.
+     * *Tab 4 (Berkas & Sertifikat):* Tabel interaktif dengan uploader lampiran dokumen asli (PDF/foto) + pengaturan kunci PIN.
+     * *Tab 5 (Publikasi ke GitHub):* Form 1-Klik commit GitHub REST API tanpa menyentuh terminal/VSCode, tombol Unduh data.js, dan tombol Reset CV asli.
+   - **Navigasi Tab Cepat:** Tombol pintas `[🌐 Portofolio Live ↗]` untuk langsung beralih ke halaman portofolio, sakelar tema Gelap/Terang, dan tombol Keluar (Logout).
 
-2. **Integrasi GitHub REST API (1-Klik Tanpa Koding):**
-   - Disediakan form konfigurasi kredensial aman (GitHub Username, Nama Repositori, Branch, dan Personal Access Token).
-   - Tombol `[🚀 Simpan & Publikasikan ke GitHub Sekarang]` yang otomatis meng-commit data terbaru ke repositori GitHub via REST API.
-   - Pengguna tidak perlu membuka terminal, VSCode, atau membuka kodingan di GitHub lagi untuk memperbarui portofolio live.
-
-3. **Mekanisme Cadangan Offline & Unduhan:**
-   - Tombol `[💾 Unduh data.js]` untuk backup manual file konfigurasi.
-   - Tombol `[🔄 Reset ke Versi Asli CV]` untuk mengembalikan data kapan saja.
+2. **Pembaruan Halaman Utama (`index.html`):**
+   - Tombol **"Portal Admin ↗"** di bilah navigasi atas (navbar desktop) dan drawer mobile kini langsung membuka `admin.html` di tab baru (`target="_blank"`).
+   - Tombol pada floating admin toolbar (`btn-open-cms-dash` & `btn-top-github-sync`) langsung mengarahkan pengguna ke `admin.html` di tab baru.
+   - **Cross-Tab Real-time Storage Sync:** Dilengkapi event listener `window.addEventListener('storage', ...)`. Setiap kali ada perubahan data yang disimpan di tab `admin.html`, tab portofolio `index.html` langsung memperbarui tampilannya secara otomatis tanpa perlu refresh manual!
 
 Jika Anda ingin mengajukan perbaikan tambahan, silakan sampaikan langsung di jendela obrolan chat.

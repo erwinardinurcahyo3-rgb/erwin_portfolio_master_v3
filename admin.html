@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dasbor Pengelola Portofolio (CMS) - Erwin Ardi Nurcahyo</title>
+  <meta name="description" content="Portal Pengelola dan Dasbor CMS Mandiri Portofolio Profesional Erwin Ardi Nurcahyo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. SISTEM DESAIN & VARIABEL WARNA (ANTI-AI AESTHETIC)
+       ========================================================================== */
+    :root {
+      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Light Mode Palette (Default Slate & Navy) */
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --border-focus: #3b82f6;
+
+      --accent-primary: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: #eff6ff;
+
+      --accent-emerald: #059669;
+      --accent-emerald-light: #ecfdf5;
+      --accent-amber: #d97706;
+      --accent-amber-light: #fffbeb;
+      --accent-rose: #e11d48;
+      --accent-rose-light: #fff1f2;
+      --accent-indigo: #4f46e5;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.12);
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.18);
+
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.25s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090d16;
+      --bg-secondary: #111827;
+      --bg-tertiary: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --border-focus: #60a5fa;
+
+      --accent-primary: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-light: rgba(59, 130, 246, 0.15);
+
+      --accent-emerald: #10b981;
+      --accent-emerald-light: rgba(16, 185, 129, 0.15);
+      --accent-amber: #f59e0b;
+      --accent-amber-light: rgba(245, 158, 11, 0.15);
+      --accent-rose: #f43f5e;
+      --accent-rose-light: rgba(244, 63, 94, 0.15);
+      --accent-indigo: #818cf8;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 14px 28px rgba(0, 0, 0, 0.6);
+      --shadow-glow: 0 0 24px rgba(59, 130, 246, 0.25);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    input, textarea, select {
+      font-family: inherit;
+      font-size: 0.9375rem;
+    }
+
+    /* ==========================================================================
+       3. TOP NAVIGATION BAR
+       ========================================================================== */
+    .admin-navbar {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.875rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-indigo));
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       4. TOMBOL & KOMPONEN UMUM
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8125rem;
+    }
+
+    .btn-xs {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      border-radius: 4px;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .btn-success {
+      background-color: var(--accent-emerald);
+      color: #ffffff;
+    }
+
+    .btn-success:hover {
+      background-color: #047857;
+      transform: translateY(-1px);
+    }
+
+    .btn-danger {
+      background-color: var(--accent-rose-light);
+      color: var(--accent-rose);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .btn-danger:hover {
+      background-color: var(--accent-rose);
+      color: #ffffff;
+    }
+
+    .btn-icon {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-icon:hover {
+      color: var(--text-primary);
+      border-color: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.7188rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-emerald {
+      background-color: var(--accent-emerald-light);
+      color: var(--accent-emerald);
+    }
+
+    .badge-amber {
+      background-color: var(--accent-amber-light);
+      color: var(--accent-amber);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-light);
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       5. LAYAR LOGIN MANDIRI (AUTHENTICATION CARD)
+       ========================================================================== */
+    .auth-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem;
+      box-shadow: var(--shadow-lg);
+      animation: fadeInScale 0.3s ease-out;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .auth-icon-badge {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .auth-title {
+      font-size: 1.375rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .auth-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+    }
+
+    .input-pass-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 0.65rem 0.875rem;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      transition: all var(--transition-fast);
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .btn-toggle-pass {
+      position: absolute;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-toggle-pass:hover {
+      color: var(--text-primary);
+    }
+
+    .auth-tip-box {
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.875rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .auth-error {
+      color: var(--accent-rose);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-top: 0.4rem;
+      min-height: 20px;
+    }
+
+    /* ==========================================================================
+       6. DASBOR CMS HALAMAN PENUH (FULL PAGE DASHBOARD)
+       ========================================================================== */
+    .dashboard-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+      flex: 1;
+    }
+
+    .dash-header-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .dash-user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .dash-avatar-mini {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dash-user-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .dash-user-subtitle {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .dash-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .dash-stat-item {
+      background-color: var(--bg-tertiary);
+      padding: 0.65rem 0.875rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .dash-stat-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+      font-family: var(--font-mono);
+      line-height: 1.2;
+    }
+
+    .dash-stat-lbl {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* CMS Tabs Navigation */
+    .cms-tabs-nav {
+      display: flex;
+      gap: 0.35rem;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.35rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .cms-tabs-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cms-tab-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.65rem 0.875rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .cms-tab-btn:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    .cms-tab-btn.active {
+      color: #ffffff;
+      background-color: var(--accent-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* CMS Content Panes */
+    .cms-tab-pane {
+      display: none;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.2s ease-in;
+    }
+
+    .cms-tab-pane.active {
+      display: block;
+    }
+
+    /* Uploader Foto Profil */
+    .cms-avatar-uploader-box {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .cms-avatar-preview-img {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Tabel Daftar Data CMS */
+    .cms-list-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin-top: 0.75rem;
+    }
+
+    .cms-list-table th, .cms-list-table td {
+      padding: 0.75rem 0.875rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .cms-list-table th {
+      background-color: var(--bg-tertiary);
+      font-weight: 700;
+      color: var(--text-secondary);
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .cms-list-table tbody tr:hover {
+      background-color: var(--bg-tertiary);
+    }
+
+    /* Toast Container */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 380px;
+      pointer-events: auto;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.toast-success {
+      border-left: 4px solid var(--accent-emerald);
+    }
+
+    .toast.toast-error {
+      border-left: 4px solid var(--accent-rose);
+    }
+
+    .toast.toast-info {
+      border-left: 4px solid var(--accent-primary);
+    }
+
+    /* Animasi */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .shake {
+      animation: shakeKeyframes 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    @keyframes shakeKeyframes {
+      10%, 90% { transform: translate3d(-1px, 0, 0); }
+      20%, 80% { transform: translate3d(2px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+      40%, 60% { transform: translate3d(3px, 0, 0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== TOP NAVIGATION BAR ==================== -->
+  <nav class="admin-navbar">
+    <div class="navbar-inner">
+      <div class="brand-group">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">
+            <span>Portal Admin CMS</span>
+            <span class="badge badge-emerald" id="admin-badge-status" style="display: none;">Sesi Aktif</span>
+          </div>
+          <div class="brand-subtitle">Erwin Ardi Nurcahyo • Pengelola Portofolio</div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Sakelar Tema Gelap/Terang -->
+        <button type="button" class="btn-icon" id="theme-toggle" title="Ganti Tema Gelap / Terang">
+          <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <!-- Tombol Lihat Portofolio Live -->
+        <a href="index.html" class="btn btn-secondary btn-sm" id="btn-view-live-portfolio" target="_blank" rel="noopener noreferrer" title="Buka Halaman Portofolio Utama di Tab Baru">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span>Portofolio Live ↗</span>
+        </a>
+
+        <!-- Tombol Logout (Muncul saat login) -->
+        <button type="button" class="btn btn-danger btn-sm" id="btn-top-logout" style="display: none;" title="Keluar dari mode pengelola">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Keluar</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== 1. LAYAR LOGIN MANDIRI ==================== -->
+  <main class="auth-wrapper" id="auth-section">
+    <div class="auth-card" id="auth-card">
+      <div class="auth-header">
+        <div class="auth-icon-badge">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h1 class="auth-title">Portal Masuk Pengelola</h1>
+        <p class="auth-desc">
+          Masukkan kata sandi pengelola untuk membuka Dasbor CMS dan memperbarui foto, riwayat kerja, proyek, serta berkas sertifikat Anda.
+        </p>
+      </div>
+
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label for="admin-pass-input" class="form-label">Kata Sandi Pengelola</label>
+          <div class="input-pass-wrapper">
+            <input type="password" id="admin-pass-input" class="form-input" placeholder="Masukkan kata sandi..." required autocomplete="current-password" autofocus>
+            <button type="button" class="btn-toggle-pass" id="btn-toggle-pass" title="Tampilkan / Sembunyikan sandi">
+              <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <div id="admin-login-error" class="auth-error"></div>
+        </div>
+
+        <div class="auth-tip-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-amber); flex-shrink: 0;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div>Sandi Standar: <strong>admin123</strong></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+            <span>Masuk ke Dasbor Pengelola</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          
+          <a href="index.html" class="btn btn-secondary" style="width: 100%;">
+            <span>← Kembali ke Portofolio Utama</span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- ==================== 2. DASBOR CMS HALAMAN PENUH ==================== -->
+  <main class="dashboard-container" id="dashboard-section" style="display: none;">
+    <!-- Dashboard Overview Strip -->
+    <div class="dash-header-card">
+      <div class="dash-user-info">
+        <img src="" alt="Avatar Erwin" class="dash-avatar-mini" id="dash-top-avatar">
+        <div>
+          <h2 class="dash-user-title" id="dash-top-name">Erwin Ardi Nurcahyo</h2>
+          <p class="dash-user-subtitle" id="dash-top-title">Safety Officer & Operations Specialist</p>
+        </div>
+      </div>
+
+      <div class="dash-stats-grid">
+        <div class="dash-stat-item">
+          <div class="dash-stat-val" id="stat-count-exp">0</div>
+          <div class="dash-stat-lbl">Pengalaman</div>
+        </div>
+        <div class="dash-stat-item">
+          <div class="dash-stat-val" id="stat-count-proj">0</div>
+          <div class="dash-stat-lbl">Proyek STAR</div>
+        </div>
+        <div class="dash-stat-item">
+          <div class="dash-stat-val" id="stat-count-docs">0</div>
+          <div class="dash-stat-lbl">Berkas & Dokumen</div>
+        </div>
+        <div class="dash-stat-item">
+          <div class="dash-stat-val" style="color: var(--accent-emerald);">Live</div>
+          <div class="dash-stat-lbl">Status Sync</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CMS Tabs Navigation -->
+    <div class="cms-tabs-nav">
+      <button type="button" class="cms-tab-btn active" data-tab="tab-profil">
+        <span>👤 Profil & Foto</span>
+      </button>
+      <button type="button" class="cms-tab-btn" data-tab="tab-pengalaman">
+        <span>💼 Pengalaman Kerja</span>
+      </button>
+      <button type="button" class="cms-tab-btn" data-tab="tab-proyek">
+        <span>🚀 Proyek STAR</span>
+      </button>
+      <button type="button" class="cms-tab-btn" data-tab="tab-dokumen">
+        <span>📄 Berkas & Sertifikat</span>
+      </button>
+      <button type="button" class="cms-tab-btn" data-tab="tab-github">
+        <span>🚀 Publikasi ke GitHub</span>
+      </button>
+    </div>
+
+    <!-- ========== TAB 1: PROFIL & FOTO ========== -->
+    <div class="cms-tab-pane active" id="tab-profil">
+      <form id="cms-profile-form">
+        <!-- Uploader Foto Profil -->
+        <div class="cms-avatar-uploader-box">
+          <img src="" alt="Pratinjau Foto Profil" class="cms-avatar-preview-img" id="cms-avatar-preview">
+          <div style="flex-grow: 1;">
+            <label class="form-label">Ganti Foto Profil Anda</label>
+            <p style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              Pilih foto baru dari galeri HP atau laptop. Sistem otomatis mengompresi dan menyesuaikan rasio secara profesional.
+            </p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <input type="file" id="cms-avatar-file-input" accept="image/*" style="display: none;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('cms-avatar-file-input').click();">
+                📁 Pilih Foto dari Perangkat
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-cms-avatar-url-prompt">
+                🌐 Gunakan Link URL Foto
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cms-name" class="form-label">Nama Lengkap & Gelar</label>
+            <input type="text" id="cms-name" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="cms-title" class="form-label">Peran / Headline Utama</label>
+            <input type="text" id="cms-title" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cms-tagline" class="form-label">Tagline Elevator Pitch</label>
+          <textarea id="cms-tagline" class="form-textarea" style="min-height: 70px;" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="cms-status-text" class="form-label">Status Ketersediaan Kerja (Pill Status)</label>
+          <input type="text" id="cms-status-text" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cms-bio-1" class="form-label">Paragraf Bio 1 (Latar Belakang & Pendidikan)</label>
+          <textarea id="cms-bio-1" class="form-textarea" style="min-height: 80px;" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="cms-bio-2" class="form-label">Paragraf Bio 2 (Pengalaman & Fokus Saat Ini)</label>
+          <textarea id="cms-bio-2" class="form-textarea" style="min-height: 80px;" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="cms-philosophy" class="form-label">Prinsip & Nilai Kerja</label>
+          <input type="text" id="cms-philosophy" class="form-input" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cms-phone" class="form-label">Nomor Telepon / WhatsApp</label>
+            <input type="text" id="cms-phone" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="cms-email" class="form-label">Email Resmi</label>
+            <input type="email" id="cms-email" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cms-location" class="form-label">Domisili / Lokasi</label>
+          <input type="text" id="cms-location" class="form-input" required>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="submit" class="btn btn-primary">
+            💾 Simpan Perubahan Profil
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ========== TAB 2: PENGALAMAN KERJA ========== -->
+    <div class="cms-tab-pane" id="tab-pengalaman">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <h3 style="font-size: 1.125rem; font-weight: 800;">Daftar Riwayat Karier & Lapangan</h3>
+        <button type="button" class="btn btn-primary btn-sm" id="btn-cms-add-exp">
+          + Tambah Pengalaman Baru
+        </button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="cms-list-table">
+          <thead>
+            <tr>
+              <th>Posisi / Peran</th>
+              <th>Perusahaan</th>
+              <th>Periode</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="cms-exp-tbody">
+            <!-- Diisi baris dinamis -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FORM TAMBAH / EDIT PENGALAMAN -->
+      <div id="cms-exp-form-box" style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
+        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-exp-form-title">Tambah Pengalaman</h4>
+        <form id="cms-exp-form">
+          <input type="hidden" id="cms-exp-index" value="-1">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cms-exp-role" class="form-label">Peran / Jabatan *</label>
+              <input type="text" id="cms-exp-role" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="cms-exp-company" class="form-label">Nama Perusahaan / Site *</label>
+              <input type="text" id="cms-exp-company" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cms-exp-period" class="form-label">Periode Kerja *</label>
+              <input type="text" id="cms-exp-period" class="form-input" placeholder="contoh: Dec 2025 – Sekarang" required>
+            </div>
+            <div class="form-group">
+              <label for="cms-exp-location" class="form-label">Lokasi</label>
+              <input type="text" id="cms-exp-location" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-exp-desc" class="form-label">Deskripsi Tanggung Jawab Utama</label>
+            <textarea id="cms-exp-desc" class="form-textarea" style="min-height: 70px;" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-exp-highlights" class="form-label">Poin-Poin Pencapaian / Highlights (Satu per baris)</label>
+            <textarea id="cms-exp-highlights" class="form-textarea" placeholder="Poin 1&#10;Poin 2&#10;Poin 3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-exp-tags" class="form-label">Tag Keahlian (Pisahkan dengan koma)</label>
+            <input type="text" id="cms-exp-tags" class="form-input" placeholder="K3 Tambang, ERP SAP, Audit">
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-cms-cancel-exp">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm">Simpan Pengalaman</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========== TAB 3: PROYEK STAR ========== -->
+    <div class="cms-tab-pane" id="tab-proyek">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <h3 style="font-size: 1.125rem; font-weight: 800;">Daftar Proyek Unggulan (Metode STAR)</h3>
+        <button type="button" class="btn btn-primary btn-sm" id="btn-cms-add-proj">
+          + Tambah Proyek Baru
+        </button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="cms-list-table">
+          <thead>
+            <tr>
+              <th>Judul Proyek</th>
+              <th>Peran</th>
+              <th>Periode</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="cms-proj-tbody">
+            <!-- Diisi baris dinamis -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FORM TAMBAH / EDIT PROYEK -->
+      <div id="cms-proj-form-box" style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
+        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-proj-form-title">Tambah Proyek</h4>
+        <form id="cms-proj-form">
+          <input type="hidden" id="cms-proj-index" value="-1">
+
+          <div class="form-group">
+            <label for="cms-proj-title" class="form-label">Judul Inisiatif / Proyek *</label>
+            <input type="text" id="cms-proj-title" class="form-input" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cms-proj-role" class="form-label">Peran Anda *</label>
+              <input type="text" id="cms-proj-role" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="cms-proj-period" class="form-label">Periode</label>
+              <input type="text" id="cms-proj-period" class="form-input" placeholder="contoh: 2025 – 2026">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-proj-summary" class="form-label">Ringkasan Singkat</label>
+            <textarea id="cms-proj-summary" class="form-textarea" style="min-height: 60px;" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-proj-situation" class="form-label">Tantangan (Situation & Task)</label>
+            <textarea id="cms-proj-situation" class="form-textarea" style="min-height: 60px;" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-proj-action" class="form-label">Tindakan Nyata (Action)</label>
+            <textarea id="cms-proj-action" class="form-textarea" style="min-height: 60px;" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-proj-result" class="form-label">Hasil Nyata Terukur (Result)</label>
+            <textarea id="cms-proj-result" class="form-textarea" style="min-height: 60px;" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-proj-tags" class="form-label">Tag Teknologi / Keahlian (Pisahkan dengan koma)</label>
+            <input type="text" id="cms-proj-tags" class="form-input" placeholder="K3 Tambang, Risk Mitigation">
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-cms-cancel-proj">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm">Simpan Proyek</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========== TAB 4: BERKAS & SERTIFIKAT ========== -->
+    <div class="cms-tab-pane" id="tab-dokumen">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <h3 style="font-size: 1.125rem; font-weight: 800;">Daftar Berkas, Sertifikat & Ijazah</h3>
+        <button type="button" class="btn btn-primary btn-sm" id="btn-cms-add-doc">
+          + Tambah Berkas Baru
+        </button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="cms-list-table">
+          <thead>
+            <tr>
+              <th>Judul Dokumen</th>
+              <th>Kategori</th>
+              <th>Penerbit</th>
+              <th>Proteksi PIN</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="cms-docs-tbody">
+            <!-- Diisi baris dinamis -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FORM TAMBAH / EDIT DOKUMEN -->
+      <div id="cms-doc-form-box" style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
+        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-doc-form-title">Tambah Berkas Dokumen</h4>
+        <form id="cms-doc-form">
+          <input type="hidden" id="cms-doc-id" value="">
+
+          <div class="form-group">
+            <label for="cms-doc-title" class="form-label">Judul Dokumen / Sertifikat *</label>
+            <input type="text" id="cms-doc-title" class="form-input" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cms-doc-category" class="form-label">Kategori Dokumen *</label>
+              <select id="cms-doc-category" class="form-select" required>
+                <option value="Sertifikasi K3">Sertifikasi K3</option>
+                <option value="Sertifikasi BNSP">Sertifikasi BNSP</option>
+                <option value="Sertifikasi Operasional">Sertifikasi Operasional</option>
+                <option value="Manajemen Risiko">Manajemen Risiko</option>
+                <option value="Lisensi Kerja">Lisensi Kerja</option>
+                <option value="Ijazah">Ijazah</option>
+                <option value="Penghargaan">Penghargaan</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="cms-doc-badge-color" class="form-label">Warna Label Badge</label>
+              <select id="cms-doc-badge-color" class="form-select">
+                <option value="emerald">Hijau (Emerald)</option>
+                <option value="blue">Biru (Blue)</option>
+                <option value="indigo">Ungu (Indigo)</option>
+                <option value="amber">Kuning (Amber)</option>
+                <option value="rose">Merah (Rose)</option>
+                <option value="teal">Toska (Teal)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cms-doc-issuer" class="form-label">Lembaga Penerbit *</label>
+              <input type="text" id="cms-doc-issuer" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="cms-doc-year" class="form-label">Tahun / Masa Berlaku</label>
+              <input type="text" id="cms-doc-year" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cms-doc-cred-id" class="form-label">Nomor Registrasi / Kredensial</label>
+              <input type="text" id="cms-doc-cred-id" class="form-input">
+            </div>
+            <div class="form-group">
+              <label for="cms-doc-filename" class="form-label">Nama Berkas Unduhan</label>
+              <input type="text" id="cms-doc-filename" class="form-input">
+            </div>
+          </div>
+
+          <!-- UPLOAD FILE SERTIFIKAT DARI HP/LAPTOP -->
+          <div class="form-group" style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px dashed var(--border-color);">
+            <label class="form-label">Lampirkan Salinan Dokumen Asli (PDF atau Foto dari HP/Laptop)</label>
+            <input type="file" id="cms-doc-file-input" accept=".pdf,image/*" style="display: none;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('cms-doc-file-input').click();">
+                📁 Pilih File dari Perangkat
+              </button>
+              <span id="cms-doc-file-label" style="font-size: 0.8125rem; color: var(--text-muted);">Belum ada berkas baru dipilih (menggunakan template standar)</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cms-doc-desc" class="form-label">Deskripsi / Ruang Lingkup Kompetensi</label>
+            <textarea id="cms-doc-desc" class="form-textarea" style="min-height: 70px;"></textarea>
+          </div>
+
+          <div class="form-group" style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.875rem; font-weight: 600;">
+              <input type="checkbox" id="cms-doc-is-protected" style="width: 18px; height: 18px;">
+              <span>Kunci dokumen ini dengan 4-digit PIN rahasia</span>
+            </label>
+
+            <div id="cms-doc-pin-wrapper" style="display: none; margin-top: 0.75rem;">
+              <label for="cms-doc-pin" class="form-label">Kode PIN 4-Angka</label>
+              <input type="text" id="cms-doc-pin" class="form-input" maxlength="4" placeholder="1234" style="max-width: 140px; font-weight: 700; letter-spacing: 0.2em; text-align: center;">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-cms-cancel-doc">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm">Simpan Berkas</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========== TAB 5: PUBLIKASIKAN KE GITHUB ========== -->
+    <div class="cms-tab-pane" id="tab-github">
+      <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-lg); border: 1.5px solid var(--accent-primary); margin-bottom: 1.5rem;">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-light); color: var(--accent-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </div>
+          <div>
+            <h4 style="font-size: 1.125rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.35rem;">
+              1-Klik Simpan & Publikasikan ke GitHub Pages
+            </h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">
+              Dengan integrasi REST API ini, seluruh pembaruan foto, teks profil, riwayat kerja, dan dokumen yang Anda simpan di sini akan langsung di-commit ke repositori GitHub Anda. Portofolio live Anda akan otomatis ter-update tanpa perlu membuka kodingan lagi.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <form id="cms-github-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cms-gh-user" class="form-label">Username GitHub *</label>
+            <input type="text" id="cms-gh-user" class="form-input" placeholder="contoh: erwinardinurcahyo" required>
+          </div>
+          <div class="form-group">
+            <label for="cms-gh-repo" class="form-label">Nama Repositori *</label>
+            <input type="text" id="cms-gh-repo" class="form-input" placeholder="contoh: Portofolio" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cms-gh-branch" class="form-label">Branch Utama</label>
+            <input type="text" id="cms-gh-branch" class="form-input" value="main" required>
+          </div>
+          <div class="form-group">
+            <label for="cms-gh-token" class="form-label">GitHub Personal Access Token (PAT) *</label>
+            <input type="password" id="cms-gh-token" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" required autocomplete="off">
+          </div>
+        </div>
+
+        <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          <strong>💡 Cara Membuat Token GitHub (Hanya 1 Menit & Gratis):</strong><br>
+          1. Buka akun GitHub Anda ➔ Klik foto profil di pojok kanan atas ➔ <em>Settings</em>.<br>
+          2. Gulir ke paling bawah ➔ Klik <em>Developer Settings</em> ➔ <em>Personal access tokens</em> ➔ <em>Tokens (classic)</em>.<br>
+          3. Klik <em>Generate new token (classic)</em> ➔ Centang izin <strong>repo</strong> ➔ Klik <em>Generate</em> ➔ Salin kodenya ke kotak di atas.
+        </div>
+
+        <div id="cms-gh-status-msg" style="margin-bottom: 1rem; font-size: 0.875rem; font-weight: 600; min-height: 20px;"></div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button type="submit" class="btn btn-success" id="btn-cms-publish-now" style="flex: 1;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 16 12 12 8 16"></polyline>
+              <line x1="12" y1="12" x2="12" y2="21"></line>
+              <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+              <polyline points="16 16 12 12 8 16"></polyline>
+            </svg>
+            <span>🚀 Simpan & Publikasikan ke GitHub Sekarang</span>
+          </button>
+
+          <button type="button" class="btn btn-secondary" id="btn-cms-download-datajs">
+            <span>💾 Unduh data.js</span>
+          </button>
+
+          <button type="button" class="btn btn-secondary" id="btn-cms-reset-all">
+            <span>🔄 Reset ke Versi Asli CV</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- ==================== TOAST CONTAINER ==================== -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Fallback dataset jika js/data.js belum di-load -->
+  <script src="js/data.js"></script>
+
+  <!-- ==================== SCRIPT CMS ENGINE (STANDALONE) ==================== -->
+  <script>
+    // 1. DATA MASTER ERWIN ARDI NURCAHYO (FALLBACK DEFAULT)
+    const MASTER_CV_DATA = window.PORTFOLIO_DATA || {
+      profile: {
+        name: "Erwin Ardi Nurcahyo",
+        title: "Safety Officer & Operations Specialist | S1 Sistem Informasi",
+        tagline: "Mengintegrasikan inspeksi lapangan langsung dengan digitalisasi pelaporan K3 dan optimasi operasional berbasis ERP (SAP) & data analitik.",
+        location: "Kalimantan Selatan, Tanah Bumbu, Sungai Loban, Desa Batu Meranti",
+        status: {
+          available: true,
+          text: "Safety Officer di PT BIB • Terbuka untuk Kolaborasi"
+        },
+        bio: [
+          "Seorang profesional di bidang Safety & Operations dengan latar belakang pendidikan S1 Sistem Informasi (IPK 3,44 – Predikat Sangat Memuaskan). Memiliki kombinasi keahlian unik antara pengawasan teknis lapangan dengan kemampuan analisis data yang mendalam.",
+          "Berpengalaman lebih dari 2 tahun dalam optimasi rantai pasok dan administrasi komersial menggunakan ERP (SAP). Saat ini berfokus pada peran Safety Officer di PT Equipment Reliability Management Site Borneo Indobara (BIB), di mana saya mengintegrasikan inspeksi lapangan langsung dengan digitalisasi pelaporan untuk meningkatkan akurasi kepatuhan K3 dan efisiensi operasional secara real-time."
+        ],
+        workPhilosophy: "Keselamatan kerja (Zero Incident) dan efisiensi operasional tercapai melalui integritas pengawasan lapangan, kepatuhan audit standar K3, serta digitalisasi pelaporan data yang transparan dan akurat.",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+        cvUrl: "docs/CV_Erwin_Ardi_Nurcahyo_2026.pdf",
+        cvFilename: "CV_Erwin_Ardi_Nurcahyo_2026.pdf",
+        contact: {
+          email: "erwinardinurcahyo3@gmail.com",
+          phone: "+62 857-5416-5965",
+          whatsapp: "6285754165965",
+          linkedin: "https://linkedin.com/in/erwin-ardi-nurcahyo",
+          github: "https://github.com/erwinardinurcahyo"
+        }
+      },
+      stats: [
+        { label: "Pengalaman Kerja", value: "2+ Thn", description: "Safety Officer & Commercial Operations" },
+        { label: "Kepatuhan K3", value: "100%", description: "Inspeksi harian, audit, & Hazard Report" },
+        { label: "Sertifikasi Resmi", value: "7+", description: "BNSP, K3 Pertambangan & Operasional" },
+        { label: "Indeks Prestasi", value: "3.44", description: "S1 Sistem Informasi (Sangat Memuaskan)" }
+      ],
+      skills: [
+        {
+          category: "Safety & K3 Pertambangan",
+          items: ["Pengawasan Lapangan Tambang", "Analisis Kerja Aman (PWP)", "Identifikasi Bahaya & Penilaian Resiko (IBPR)", "Izin Kerja Khusus (PKK)", "K3 Pertambangan", "Inspeksi & Audit K3", "Hazard & Near Miss Reporting"]
+        },
+        {
+          category: "Sistem ERP & Analisis Data",
+          items: ["SAP (Systems, Applications, Products)", "Microsoft Excel (Formula & Analisis)", "Google Spreadsheets", "KNIME Analytics", "Looker Studio", "Visualisasi Data Operasional"]
+        }
+      ],
+      experience: [
+        {
+          role: "Safety Officer",
+          company: "PT Equipment Reliability Management – Site Borneo Indobara (BIB)",
+          period: "Dec 2025 – Sekarang",
+          location: "Tanah Bumbu, Kalimantan Selatan",
+          description: "Bertanggung jawab penuh atas pengawasan keselamatan kerja, kepatuhan K3 operasional alat berat, dan implementasi digitalisasi laporan inspeksi di site pertambangan batubara.",
+          highlights: [
+            "Memimpin inspeksi keselamatan harian mencakup kepatuhan APD, izin kerja khusus (PKK), dan analisis keselamatan kerja (PWP).",
+            "Menerapkan digitalisasi formulir pelaporan Hazard Report dan Near Miss via spreadsheet analitik.",
+            "Berpartisipasi aktif dalam audit internal dan evaluasi berkala dokumen IBPR bersama tim engineering."
+          ],
+          technologies: ["K3 Pertambangan", "Hazard Report", "IBPR", "Inspeksi Lapangan", "SOP Keselamatan Tambang"]
+        },
+        {
+          role: "Admin Commercial – Divisi Sales & Ops",
+          company: "PT Aviko Sepinggan SSB (Mining & Heavy Equipment Services)",
+          period: "Jan 2024 – Nov 2025",
+          location: "Balikpapan / Kalsel Site",
+          description: "Mengelola administrasi komersial rantai pasok komponen suku cadang alat berat dan logistik mining equipment menggunakan ERP SAP.",
+          highlights: [
+            "Memproses Sales Order, Purchase Order, dan Good Issue pada modul SAP secara real-time.",
+            "Melakukan rekonsiliasi data inventaris suku cadang mingguan dengan tingkat akurasi 99.4%.",
+            "Menyusun laporan analitik komersial bulanan untuk evaluasi margin dan efisiensi pengadaan."
+          ],
+          technologies: ["ERP SAP", "Logistik Tambang", "Supply Chain", "Sales Order", "Rekonsiliasi Data"]
+        },
+        {
+          role: "Mitra Statistik Lapangan & Pengolah Data",
+          company: "Badan Pusat Statistik (BPS) Kota Banjarmasin",
+          period: "Mar 2023 – Des 2023",
+          location: "Banjarmasin, Kalimantan Selatan",
+          description: "Melakukan survei lapangan sensus ekonomi dan validasi entri data demografi penduduk dengan kepatuhan verifikasi silang 100%.",
+          highlights: [
+            "Melakukan wawancara terstruktur dan verifikasi lapangan pada lebih dari 500+ responden.",
+            "Memasukkan dan memvalidasi data menggunakan aplikasi pengolahan statistik resmi BPS.",
+            "Meraih predikat Mitra Berkinerja Terbaik atas kecepatan dan akurasi data lapangan."
+          ],
+          technologies: ["Pengolahan Data", "Validasi Statistik", "Survei Lapangan", "Data Integrity"]
+        }
+      ],
+      projects: [
+        {
+          id: "PRJ-EAN-001",
+          title: "Sistem Digitalisasi Hazard & Near Miss Reporting Lapangan",
+          role: "Lead Safety Officer & Inisiator Sistem",
+          period: "2025 – 2026",
+          summary: "Transformasi proses pelaporan bahaya kerja di site BIB dari formulir kertas manual menjadi sistem registrasi digital berbasis QR-Code dan lembar kerja analitik.",
+          starMethod: {
+            situation: "Waktu penanganan potensi bahaya (hazard) di area workshop dan pit tambang sering terlambat hingga 48 jam akibat pengisian kertas fisik yang lambat sampai ke kantor K3.",
+            task: "Merancang mekanisme pelaporan yang cepat, dapat diakses instan oleh mekanik/operator di lapangan, dan terintegrasi otomatis ke dasbor K3.",
+            action: "Mengembangkan QR Code formulir cepat di area kerja workshop dan mengintegrasikannya dengan spreadsheet analitik dengan notifikasi otomatis.",
+            result: "Waktu respons perbaikan bahaya turun drastis dari 48 jam menjadi di bawah 4 jam. Angka pelaporan proaktif pekerja naik 320% dengan Zero Accident."
+          },
+          tags: ["K3 Tambang", "Digitalisasi K3", "Zero Accident", "ERP SAP"],
+          isFeatured: true
+        },
+        {
+          id: "PRJ-EAN-002",
+          title: "Optimasi Alur Administrasi Komersial SAP & Pengadaan Sparepart",
+          role: "Admin Commercial & Inventory Analyst",
+          period: "2024 – 2025",
+          summary: "Restrukturisasi prosedur input SAP untuk pesanan suku cadang kritis alat berat demi memangkas lead time pengiriman ke area tambang.",
+          starMethod: {
+            situation: "Keterlambatan input pesanan suku cadang di sistem SAP menyebabkan downtime unit excavator dan dump truck di site.",
+            task: "Menyederhanakan alur pembuatan Purchase Order (PO) dan matching Goods Receipt (GR) antar divisi sales dan logistik.",
+            action: "Membuat template otomasi verifikasi data dan menetapkan batasan SLA ketat 2 jam untuk setiap approval PO bernilai tinggi di SAP.",
+            result: "Memangkas lead time pengadaan komponen alat berat sebesar 28% dan mempertahankan akurasi rekonsiliasi stok inventaris pada 99.4%."
+          },
+          tags: ["ERP SAP", "Supply Chain", "Heavy Equipment", "Data Analytics"],
+          isFeatured: true
+        }
+      ],
+      documents: [
+        {
+          id: "DOC-EAN-001",
+          title: "Sertifikasi K3 Umum & Pengawas Operasional Tambang",
+          category: "Sertifikasi K3",
+          issuer: "Badan Nasional Sertifikasi Profesi (BNSP) / Kemenaker RI",
+          issueYear: "2025",
+          credentialId: "BNSP-K3-EAN-2025-098",
+          downloadName: "Sertifikat_K3_Pengawas_Tambang_Erwin.pdf",
+          badgeColor: "emerald",
+          isProtected: false,
+          accessPin: null,
+          redactionStatus: "Verified & Redacted for Privacy",
+          description: "Sertifikasi kompetensi resmi keselamatan kerja pengawas operasional lapangan pertambangan mineral dan batubara."
+        },
+        {
+          id: "DOC-EAN-002",
+          title: "Ijazah Sarjana Komputer (S1) – Sistem Informasi",
+          category: "Ijazah",
+          issuer: "Universitas Terakreditasi (IPK 3,44 – Sangat Memuaskan)",
+          issueYear: "2023",
+          credentialId: "SK-IJZ-SI-2023-441",
+          downloadName: "Ijazah_S1_Sistem_Informasi_Erwin.pdf",
+          badgeColor: "blue",
+          isProtected: false,
+          accessPin: null,
+          redactionStatus: "Verified & Redacted for Privacy",
+          description: "Salinan Ijazah Sarjana Sistem Informasi dengan fokus rekayasa sistem basis data, perancangan ERP, dan manajemen teknologi informasi."
+        },
+        {
+          id: "DOC-EAN-003",
+          title: "Dokumen Analisis Risiko & Mitigasi IBPR Site Workshop",
+          category: "Manajemen Risiko",
+          issuer: "Departemen HSE PT Equipment Reliability Management",
+          issueYear: "2026",
+          credentialId: "HSE-IBPR-BIB-2026-X1",
+          downloadName: "Dokumen_IBPR_Workshop_Unit_BIB.pdf",
+          badgeColor: "rose",
+          isProtected: true,
+          accessPin: "1234",
+          redactionStatus: "Confidential Client Data Protected",
+          description: "Dokumen Identifikasi Bahaya, Penilaian Risiko dan Pengendaliannya (IBPR) operasional workshop site BIB. Bersifat terbatas (NDA)."
+        }
+      ]
+    };
+
+    // ==================== STATE MANAGEMENT CONSTANTS ====================
+    const STORAGE_KEY_STATE = 'erwin_portfolio_master_v2';
+    const STORAGE_KEY_ADMIN = 'erwin_portfolio_is_admin';
+    const STORAGE_KEY_PASSWORD = 'erwin_portfolio_admin_password';
+    const STORAGE_KEY_GH = 'erwin_portfolio_gh_config';
+
+    function loadAppState() {
+      const stored = localStorage.getItem(STORAGE_KEY_STATE);
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error('Error parsing stored app state:', e);
+        }
+      }
+      return JSON.parse(JSON.stringify(MASTER_CV_DATA));
+    }
+
+    function saveAppState(state) {
+      localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(state));
+      CURRENT_STATE = state;
+      updateStatsCounters();
+    }
+
+    let CURRENT_STATE = loadAppState();
+    let isAdmin = localStorage.getItem(STORAGE_KEY_ADMIN) === 'true';
+
+    // GitHub Config
+    function loadGhConfig() {
+      const stored = localStorage.getItem(STORAGE_KEY_GH);
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) {}
+      }
+      return { user: '', repo: 'Portofolio', branch: 'main', token: '' };
+    }
+
+    function saveGhConfig(cfg) {
+      localStorage.setItem(STORAGE_KEY_GH, JSON.stringify(cfg));
+    }
+
+    // ==================== DOMContentLoaded ====================
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. TEMA DARK / LIGHT
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const iconMoon = document.getElementById('icon-moon');
+      const iconSun = document.getElementById('icon-sun');
+      const htmlEl = document.documentElement;
+
+      const savedTheme = localStorage.getItem('theme') ||
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark');
+
+      function applyTheme(theme) {
+        htmlEl.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (theme === 'dark') {
+          iconMoon.style.display = 'none';
+          iconSun.style.display = 'block';
+        } else {
+          iconMoon.style.display = 'block';
+          iconSun.style.display = 'none';
+        }
+      }
+      applyTheme(savedTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const nextTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+        showToast(nextTheme === 'dark' ? 'Mode Gelap diaktifkan' : 'Mode Terang diaktifkan');
+      });
+
+      // 2. TOGGLE INTIP KATA SANDI
+      const btnTogglePass = document.getElementById('btn-toggle-pass');
+      const adminPassInput = document.getElementById('admin-pass-input');
+      if (btnTogglePass && adminPassInput) {
+        btnTogglePass.addEventListener('click', () => {
+          const isPass = adminPassInput.type === 'password';
+          adminPassInput.type = isPass ? 'text' : 'password';
+        });
+      }
+
+      // 3. AUTENTIKASI ADMIN
+      const authSection = document.getElementById('auth-section');
+      const dashboardSection = document.getElementById('dashboard-section');
+      const adminBadgeStatus = document.getElementById('admin-badge-status');
+      const btnTopLogout = document.getElementById('btn-top-logout');
+      const adminLoginForm = document.getElementById('admin-login-form');
+      const adminLoginError = document.getElementById('admin-login-error');
+      const authCard = document.getElementById('auth-card');
+
+      function updateAuthScreenView() {
+        if (isAdmin) {
+          authSection.style.display = 'none';
+          dashboardSection.style.display = 'block';
+          adminBadgeStatus.style.display = 'inline-flex';
+          btnTopLogout.style.display = 'inline-flex';
+          populateCmsForms();
+          updateStatsCounters();
+
+          // Deteksi hash tab jika ada (contoh: admin.html#tab-dokumen)
+          if (window.location.hash) {
+            const targetHash = window.location.hash.replace('#', '');
+            if (document.getElementById(targetHash)) {
+              switchCmsTab(targetHash);
+            }
+          }
+        } else {
+          authSection.style.display = 'flex';
+          dashboardSection.style.display = 'none';
+          adminBadgeStatus.style.display = 'none';
+          btnTopLogout.style.display = 'none';
+          adminPassInput.value = '';
+          adminLoginError.textContent = '';
+          setTimeout(() => adminPassInput.focus(), 100);
+        }
+      }
+
+      if (adminLoginForm) {
+        adminLoginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const enteredPass = adminPassInput.value.trim();
+          const savedPass = localStorage.getItem(STORAGE_KEY_PASSWORD) || 'admin123';
+
+          if (enteredPass === savedPass) {
+            isAdmin = true;
+            localStorage.setItem(STORAGE_KEY_ADMIN, 'true');
+            updateAuthScreenView();
+            showToast('Selamat datang, Admin Erwin! Dasbor CMS siap digunakan.', 'success');
+          } else {
+            adminLoginError.textContent = 'Kata sandi salah. Sandi standar adalah admin123';
+            if (authCard) {
+              authCard.classList.remove('shake');
+              void authCard.offsetWidth;
+              authCard.classList.add('shake');
+            }
+          }
+        });
+      }
+
+      if (btnTopLogout) {
+        btnTopLogout.addEventListener('click', () => {
+          if (confirm('Keluar dari sesi Dasbor Pengelola?')) {
+            isAdmin = false;
+            localStorage.removeItem(STORAGE_KEY_ADMIN);
+            updateAuthScreenView();
+            showToast('Anda telah keluar dari mode admin.', 'info');
+          }
+        });
+      }
+
+      // 4. STATS COUNTERS & TOP PROFILE SUMMARY
+      function updateStatsCounters() {
+        const P = CURRENT_STATE.profile || {};
+        document.getElementById('dash-top-name').textContent = P.name || 'Erwin Ardi Nurcahyo';
+        document.getElementById('dash-top-title').textContent = P.title || 'Safety Officer';
+        if (P.avatar) {
+          document.getElementById('dash-top-avatar').src = P.avatar;
+        }
+
+        document.getElementById('stat-count-exp').textContent = (CURRENT_STATE.experience || []).length;
+        document.getElementById('stat-count-proj').textContent = (CURRENT_STATE.projects || []).length;
+        document.getElementById('stat-count-docs').textContent = (CURRENT_STATE.documents || []).length;
+      }
+
+      // 5. CMS TAB SWITCHING
+      const cmsTabBtns = document.querySelectorAll('.cms-tab-btn');
+      const cmsTabPanes = document.querySelectorAll('.cms-tab-pane');
+
+      function switchCmsTab(tabId) {
+        cmsTabBtns.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.tab === tabId);
+        });
+        cmsTabPanes.forEach(pane => {
+          pane.classList.toggle('active', pane.id === tabId);
+        });
+      }
+
+      cmsTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchCmsTab(btn.dataset.tab));
+      });
+
+      // 6. TAB 1: PROFIL & FOTO
+      const cmsAvatarPreview = document.getElementById('cms-avatar-preview');
+      const cmsAvatarFileInput = document.getElementById('cms-avatar-file-input');
+      const btnCmsAvatarUrlPrompt = document.getElementById('btn-cms-avatar-url-prompt');
+      let currentAvatarBase64 = '';
+
+      function populateCmsForms() {
+        const P = CURRENT_STATE.profile;
+
+        document.getElementById('cms-name').value = P.name || '';
+        document.getElementById('cms-title').value = P.title || '';
+        document.getElementById('cms-tagline').value = P.tagline || '';
+        document.getElementById('cms-status-text').value = (P.status && P.status.text) || '';
+        document.getElementById('cms-bio-1').value = (P.bio && P.bio[0]) || '';
+        document.getElementById('cms-bio-2').value = (P.bio && P.bio[1]) || '';
+        document.getElementById('cms-philosophy').value = P.workPhilosophy || '';
+        document.getElementById('cms-phone').value = (P.contact && P.contact.phone) || '';
+        document.getElementById('cms-email').value = (P.contact && P.contact.email) || '';
+        document.getElementById('cms-location').value = P.location || '';
+
+        currentAvatarBase64 = P.avatar || '';
+        if (cmsAvatarPreview) cmsAvatarPreview.src = currentAvatarBase64;
+
+        renderCmsExpList();
+        renderCmsProjList();
+        renderCmsDocsList();
+
+        const ghCfg = loadGhConfig();
+        document.getElementById('cms-gh-user').value = ghCfg.user || '';
+        document.getElementById('cms-gh-repo').value = ghCfg.repo || 'Portofolio';
+        document.getElementById('cms-gh-branch').value = ghCfg.branch || 'main';
+        document.getElementById('cms-gh-token').value = ghCfg.token || '';
+      }
+
+      // Ganti Foto Profil via File Input
+      if (cmsAvatarFileInput) {
+        cmsAvatarFileInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            const tempImg = new Image();
+            tempImg.onload = function() {
+              const canvas = document.createElement('canvas');
+              const maxDim = 800;
+              let width = tempImg.width;
+              let height = tempImg.height;
+
+              if (width > height && width > maxDim) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+              } else if (height > maxDim) {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+              }
+
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(tempImg, 0, 0, width, height);
+
+              currentAvatarBase64 = canvas.toDataURL('image/jpeg', 0.88);
+              if (cmsAvatarPreview) cmsAvatarPreview.src = currentAvatarBase64;
+              showToast('Foto baru dipilih! Klik "Simpan Perubahan Profil" untuk menyimpan.', 'info');
+            };
+            tempImg.src = evt.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (btnCmsAvatarUrlPrompt) {
+        btnCmsAvatarUrlPrompt.addEventListener('click', () => {
+          const url = window.prompt('Masukkan link URL foto profil:', currentAvatarBase64);
+          if (url && url.trim()) {
+            currentAvatarBase64 = url.trim();
+            if (cmsAvatarPreview) cmsAvatarPreview.src = currentAvatarBase64;
+          }
+        });
+      }
+
+      const cmsProfileForm = document.getElementById('cms-profile-form');
+      if (cmsProfileForm) {
+        cmsProfileForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          CURRENT_STATE.profile.name = document.getElementById('cms-name').value.trim();
+          CURRENT_STATE.profile.title = document.getElementById('cms-title').value.trim();
+          CURRENT_STATE.profile.tagline = document.getElementById('cms-tagline').value.trim();
+          CURRENT_STATE.profile.status = {
+            available: true,
+            text: document.getElementById('cms-status-text').value.trim()
+          };
+          CURRENT_STATE.profile.bio = [
+            document.getElementById('cms-bio-1').value.trim(),
+            document.getElementById('cms-bio-2').value.trim()
+          ];
+          CURRENT_STATE.profile.workPhilosophy = document.getElementById('cms-philosophy').value.trim();
+          CURRENT_STATE.profile.location = document.getElementById('cms-location').value.trim();
+          CURRENT_STATE.profile.avatar = currentAvatarBase64;
+
+          const phone = document.getElementById('cms-phone').value.trim();
+          const cleanWa = phone.replace(/[^0-9]/g, '');
+          CURRENT_STATE.profile.contact = {
+            phone: phone,
+            whatsapp: cleanWa.startsWith('0') ? '62' + cleanWa.slice(1) : cleanWa,
+            email: document.getElementById('cms-email').value.trim(),
+            linkedin: CURRENT_STATE.profile.contact.linkedin || '',
+            github: CURRENT_STATE.profile.contact.github || ''
+          };
+
+          saveAppState(CURRENT_STATE);
+          showToast('Profil dan foto berhasil diperbarui!', 'success');
+        });
+      }
+
+      // 7. TAB 2: PENGALAMAN KERJA (CRUD)
+      const cmsExpTbody = document.getElementById('cms-exp-tbody');
+      const cmsExpFormBox = document.getElementById('cms-exp-form-box');
+      const cmsExpForm = document.getElementById('cms-exp-form');
+      const btnCmsAddExp = document.getElementById('btn-cms-add-exp');
+      const btnCmsCancelExp = document.getElementById('btn-cms-cancel-exp');
+
+      function renderCmsExpList() {
+        if (!cmsExpTbody) return;
+        const exps = CURRENT_STATE.experience || [];
+
+        cmsExpTbody.innerHTML = exps.map((exp, idx) => `
+          <tr>
+            <td><strong>${escapeHTML(exp.role)}</strong></td>
+            <td>${escapeHTML(exp.company)}</td>
+            <td>${escapeHTML(exp.period)}</td>
+            <td>
+              <button type="button" class="btn btn-secondary btn-xs" onclick="window.editCmsExpItem(${idx})">Edit</button>
+              <button type="button" class="btn btn-danger btn-xs" onclick="window.deleteCmsExpItem(${idx})">Hapus</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      window.editCmsExpItem = function(idx) {
+        const exp = CURRENT_STATE.experience[idx];
+        if (!exp) return;
+
+        document.getElementById('cms-exp-form-title').textContent = `Edit Pengalaman: ${exp.role}`;
+        document.getElementById('cms-exp-index').value = idx;
+        document.getElementById('cms-exp-role').value = exp.role || '';
+        document.getElementById('cms-exp-company').value = exp.company || '';
+        document.getElementById('cms-exp-period').value = exp.period || '';
+        document.getElementById('cms-exp-location').value = exp.location || '';
+        document.getElementById('cms-exp-desc').value = exp.description || '';
+        document.getElementById('cms-exp-highlights').value = (exp.highlights || []).join('\n');
+        document.getElementById('cms-exp-tags').value = (exp.technologies || []).join(', ');
+
+        cmsExpFormBox.style.display = 'block';
+        cmsExpFormBox.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      window.deleteCmsExpItem = function(idx) {
+        const exp = CURRENT_STATE.experience[idx];
+        if (!exp) return;
+        if (confirm(`Hapus pengalaman "${exp.role} di ${exp.company}"?`)) {
+          CURRENT_STATE.experience.splice(idx, 1);
+          saveAppState(CURRENT_STATE);
+          renderCmsExpList();
+          showToast('Pengalaman berhasil dihapus.', 'info');
+        }
+      };
+
+      if (btnCmsAddExp) {
+        btnCmsAddExp.addEventListener('click', () => {
+          document.getElementById('cms-exp-form-title').textContent = 'Tambah Pengalaman Baru';
+          document.getElementById('cms-exp-index').value = '-1';
+          cmsExpForm.reset();
+          cmsExpFormBox.style.display = 'block';
+        });
+      }
+
+      if (btnCmsCancelExp) {
+        btnCmsCancelExp.addEventListener('click', () => {
+          cmsExpFormBox.style.display = 'none';
+        });
+      }
+
+      if (cmsExpForm) {
+        cmsExpForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const idx = parseInt(document.getElementById('cms-exp-index').value);
+
+          const expData = {
+            role: document.getElementById('cms-exp-role').value.trim(),
+            company: document.getElementById('cms-exp-company').value.trim(),
+            period: document.getElementById('cms-exp-period').value.trim(),
+            location: document.getElementById('cms-exp-location').value.trim(),
+            description: document.getElementById('cms-exp-desc').value.trim(),
+            highlights: document.getElementById('cms-exp-highlights').value.split('\n').map(h => h.trim()).filter(Boolean),
+            technologies: document.getElementById('cms-exp-tags').value.split(',').map(t => t.trim()).filter(Boolean)
+          };
+
+          if (idx >= 0) {
+            CURRENT_STATE.experience[idx] = expData;
+            showToast('Pengalaman berhasil diperbarui!', 'success');
+          } else {
+            CURRENT_STATE.experience.unshift(expData);
+            showToast('Pengalaman baru berhasil ditambahkan!', 'success');
+          }
+
+          saveAppState(CURRENT_STATE);
+          renderCmsExpList();
+          cmsExpFormBox.style.display = 'none';
+        });
+      }
+
+      // 8. TAB 3: PROYEK STAR (CRUD)
+      const cmsProjTbody = document.getElementById('cms-proj-tbody');
+      const cmsProjFormBox = document.getElementById('cms-proj-form-box');
+      const cmsProjForm = document.getElementById('cms-proj-form');
+      const btnCmsAddProj = document.getElementById('btn-cms-add-proj');
+      const btnCmsCancelProj = document.getElementById('btn-cms-cancel-proj');
+
+      function renderCmsProjList() {
+        if (!cmsProjTbody) return;
+        const projs = CURRENT_STATE.projects || [];
+
+        cmsProjTbody.innerHTML = projs.map((prj, idx) => `
+          <tr>
+            <td><strong>${escapeHTML(prj.title)}</strong></td>
+            <td>${escapeHTML(prj.role)}</td>
+            <td>${escapeHTML(prj.period || '')}</td>
+            <td>
+              <button type="button" class="btn btn-secondary btn-xs" onclick="window.editCmsProjItem(${idx})">Edit</button>
+              <button type="button" class="btn btn-danger btn-xs" onclick="window.deleteCmsProjItem(${idx})">Hapus</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      window.editCmsProjItem = function(idx) {
+        const prj = CURRENT_STATE.projects[idx];
+        if (!prj) return;
+
+        document.getElementById('cms-proj-form-title').textContent = `Edit Proyek: ${prj.title}`;
+        document.getElementById('cms-proj-index').value = idx;
+        document.getElementById('cms-proj-title').value = prj.title || '';
+        document.getElementById('cms-proj-role').value = prj.role || '';
+        document.getElementById('cms-proj-period').value = prj.period || '';
+        document.getElementById('cms-proj-summary').value = prj.summary || '';
+
+        const star = prj.starMethod || {};
+        document.getElementById('cms-proj-situation').value = star.situation || '';
+        document.getElementById('cms-proj-action').value = star.action || '';
+        document.getElementById('cms-proj-result').value = star.result || '';
+        document.getElementById('cms-proj-tags').value = (prj.tags || []).join(', ');
+
+        cmsProjFormBox.style.display = 'block';
+        cmsProjFormBox.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      window.deleteCmsProjItem = function(idx) {
+        const prj = CURRENT_STATE.projects[idx];
+        if (!prj) return;
+        if (confirm(`Hapus proyek "${prj.title}"?`)) {
+          CURRENT_STATE.projects.splice(idx, 1);
+          saveAppState(CURRENT_STATE);
+          renderCmsProjList();
+          showToast('Proyek berhasil dihapus.', 'info');
+        }
+      };
+
+      if (btnCmsAddProj) {
+        btnCmsAddProj.addEventListener('click', () => {
+          document.getElementById('cms-proj-form-title').textContent = 'Tambah Proyek Baru';
+          document.getElementById('cms-proj-index').value = '-1';
+          cmsProjForm.reset();
+          cmsProjFormBox.style.display = 'block';
+        });
+      }
+
+      if (btnCmsCancelProj) {
+        btnCmsCancelProj.addEventListener('click', () => {
+          cmsProjFormBox.style.display = 'none';
+        });
+      }
+
+      if (cmsProjForm) {
+        cmsProjForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const idx = parseInt(document.getElementById('cms-proj-index').value);
+
+          const projData = {
+            id: idx >= 0 ? CURRENT_STATE.projects[idx].id : `PRJ-EAN-${Date.now().toString().slice(-4)}`,
+            title: document.getElementById('cms-proj-title').value.trim(),
+            role: document.getElementById('cms-proj-role').value.trim(),
+            period: document.getElementById('cms-proj-period').value.trim(),
+            summary: document.getElementById('cms-proj-summary').value.trim(),
+            starMethod: {
+              situation: document.getElementById('cms-proj-situation').value.trim(),
+              task: document.getElementById('cms-proj-situation').value.trim(),
+              action: document.getElementById('cms-proj-action').value.trim(),
+              result: document.getElementById('cms-proj-result').value.trim()
+            },
+            tags: document.getElementById('cms-proj-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+            isFeatured: true
+          };
+
+          if (idx >= 0) {
+            CURRENT_STATE.projects[idx] = projData;
+            showToast('Proyek berhasil diperbarui!', 'success');
+          } else {
+            CURRENT_STATE.projects.unshift(projData);
+            showToast('Proyek baru berhasil ditambahkan!', 'success');
+          }
+
+          saveAppState(CURRENT_STATE);
+          renderCmsProjList();
+          cmsProjFormBox.style.display = 'none';
+        });
+      }
+
+      // 9. TAB 4: BERKAS & SERTIFIKAT (CRUD + UPLOAD FILE ASLI)
+      const cmsDocsTbody = document.getElementById('cms-docs-tbody');
+      const cmsDocFormBox = document.getElementById('cms-doc-form-box');
+      const cmsDocForm = document.getElementById('cms-doc-form');
+      const btnCmsAddDoc = document.getElementById('btn-cms-add-doc');
+      const btnCmsCancelDoc = document.getElementById('btn-cms-cancel-doc');
+      const cmsDocFileInput = document.getElementById('cms-doc-file-input');
+      const cmsDocFileLabel = document.getElementById('cms-doc-file-label');
+      const cmsDocIsProtected = document.getElementById('cms-doc-is-protected');
+      const cmsDocPinWrapper = document.getElementById('cms-doc-pin-wrapper');
+      let currentDocUploadedDataUrl = '';
+
+      function renderCmsDocsList() {
+        if (!cmsDocsTbody) return;
+        const docs = CURRENT_STATE.documents || [];
+
+        cmsDocsTbody.innerHTML = docs.map(doc => `
+          <tr>
+            <td><strong>${escapeHTML(doc.title)}</strong></td>
+            <td><span class="badge badge-emerald">${escapeHTML(doc.category)}</span></td>
+            <td>${escapeHTML(doc.issuer)}</td>
+            <td>${doc.isProtected ? '🔒 PIN: ' + escapeHTML(doc.accessPin || '1234') : 'Bebas'}</td>
+            <td>
+              <button type="button" class="btn btn-secondary btn-xs" onclick="window.editCmsDocItem('${doc.id}')">Edit</button>
+              <button type="button" class="btn btn-danger btn-xs" onclick="window.deleteCmsDocItem('${doc.id}')">Hapus</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      if (cmsDocFileInput) {
+        cmsDocFileInput.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          cmsDocFileLabel.textContent = `Berkas terpilih: ${file.name} (${Math.round(file.size / 1024)} KB)`;
+          document.getElementById('cms-doc-filename').value = file.name;
+
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            currentDocUploadedDataUrl = evt.target.result;
+            showToast(`Berkas "${file.name}" siap dilampirkan.`, 'info');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (cmsDocIsProtected) {
+        cmsDocIsProtected.addEventListener('change', () => {
+          cmsDocPinWrapper.style.display = cmsDocIsProtected.checked ? 'block' : 'none';
+        });
+      }
+
+      window.editCmsDocItem = function(docId) {
+        const doc = (CURRENT_STATE.documents || []).find(d => d.id === docId);
+        if (!doc) return;
+
+        document.getElementById('cms-doc-form-title').textContent = `Edit Berkas: ${doc.title}`;
+        document.getElementById('cms-doc-id').value = doc.id;
+        document.getElementById('cms-doc-title').value = doc.title || '';
+        document.getElementById('cms-doc-category').value = doc.category || 'Sertifikasi K3';
+        document.getElementById('cms-doc-badge-color').value = doc.badgeColor || 'emerald';
+        document.getElementById('cms-doc-issuer').value = doc.issuer || '';
+        document.getElementById('cms-doc-year').value = doc.issueYear || '';
+        document.getElementById('cms-doc-cred-id').value = doc.credentialId || '';
+        document.getElementById('cms-doc-filename').value = doc.downloadName || '';
+        document.getElementById('cms-doc-desc').value = doc.description || '';
+
+        cmsDocIsProtected.checked = !!doc.isProtected;
+        cmsDocPinWrapper.style.display = doc.isProtected ? 'block' : 'none';
+        document.getElementById('cms-doc-pin').value = doc.accessPin || '1234';
+
+        currentDocUploadedDataUrl = doc.customFileData || '';
+        cmsDocFileLabel.textContent = doc.customFileData ? 'Telah memiliki file lampiran tersimpan.' : 'Belum ada berkas lampiran khusus.';
+
+        cmsDocFormBox.style.display = 'block';
+        cmsDocFormBox.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      window.deleteCmsDocItem = function(docId) {
+        const doc = (CURRENT_STATE.documents || []).find(d => d.id === docId);
+        if (!doc) return;
+        if (confirm(`Apakah Anda yakin ingin menghapus berkas "${doc.title}"?`)) {
+          CURRENT_STATE.documents = (CURRENT_STATE.documents || []).filter(d => d.id !== docId);
+          saveAppState(CURRENT_STATE);
+          renderCmsDocsList();
+          showToast(`Berkas "${doc.title}" telah dihapus.`, 'info');
+        }
+      };
+
+      if (btnCmsAddDoc) {
+        btnCmsAddDoc.addEventListener('click', () => {
+          document.getElementById('cms-doc-form-title').textContent = 'Tambah Berkas Baru';
+          document.getElementById('cms-doc-id').value = '';
+          cmsDocForm.reset();
+          cmsDocPinWrapper.style.display = 'none';
+          currentDocUploadedDataUrl = '';
+          cmsDocFileLabel.textContent = 'Belum ada berkas baru dipilih.';
+          cmsDocFormBox.style.display = 'block';
+        });
+      }
+
+      if (btnCmsCancelDoc) {
+        btnCmsCancelDoc.addEventListener('click', () => {
+          cmsDocFormBox.style.display = 'none';
+        });
+      }
+
+      if (cmsDocForm) {
+        cmsDocForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const targetId = document.getElementById('cms-doc-id').value;
+          const isEdit = !!targetId;
+
+          const docData = {
+            id: isEdit ? targetId : `DOC-EAN-${Date.now().toString().slice(-4)}`,
+            title: document.getElementById('cms-doc-title').value.trim(),
+            category: document.getElementById('cms-doc-category').value,
+            badgeColor: document.getElementById('cms-doc-badge-color').value,
+            issuer: document.getElementById('cms-doc-issuer').value.trim(),
+            issueYear: document.getElementById('cms-doc-year').value.trim() || 'Tervalidasi',
+            credentialId: document.getElementById('cms-doc-cred-id').value.trim() || `VER-${Date.now().toString().slice(-4)}`,
+            downloadName: document.getElementById('cms-doc-filename').value.trim() || `${document.getElementById('cms-doc-title').value.trim().replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
+            description: document.getElementById('cms-doc-desc').value.trim() || 'Dokumen kompetensi resmi terverifikasi.',
+            isProtected: cmsDocIsProtected.checked,
+            accessPin: cmsDocIsProtected.checked ? (document.getElementById('cms-doc-pin').value.trim() || '1234') : null,
+            redactionStatus: 'Verified & Redacted for Privacy',
+            customFileData: currentDocUploadedDataUrl
+          };
+
+          if (isEdit) {
+            const index = (CURRENT_STATE.documents || []).findIndex(d => d.id === targetId);
+            if (index !== -1) {
+              CURRENT_STATE.documents[index] = { ...CURRENT_STATE.documents[index], ...docData };
+              showToast(`Berkas "${docData.title}" berhasil diperbarui!`, 'success');
+            }
+          } else {
+            CURRENT_STATE.documents.unshift(docData);
+            showToast(`Berkas baru "${docData.title}" berhasil ditambahkan!`, 'success');
+          }
+
+          saveAppState(CURRENT_STATE);
+          renderCmsDocsList();
+          cmsDocFormBox.style.display = 'none';
+        });
+      }
+
+      // 10. TAB 5: PUBLIKASI KE GITHUB (GITHUB REST API)
+      const cmsGithubForm = document.getElementById('cms-github-form');
+      const cmsGhStatusMsg = document.getElementById('cms-gh-status-msg');
+      const btnCmsPublishNow = document.getElementById('btn-cms-publish-now');
+      const btnCmsDownloadDatajs = document.getElementById('btn-cms-download-datajs');
+      const btnCmsResetAll = document.getElementById('btn-cms-reset-all');
+
+      function utf8ToBase64(str) {
+        return window.btoa(unescape(encodeURIComponent(str)));
+      }
+
+      if (cmsGithubForm) {
+        cmsGithubForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const user = document.getElementById('cms-gh-user').value.trim();
+          const repo = document.getElementById('cms-gh-repo').value.trim();
+          const branch = document.getElementById('cms-gh-branch').value.trim() || 'main';
+          const token = document.getElementById('cms-gh-token').value.trim();
+
+          if (!user || !repo || !token) {
+            cmsGhStatusMsg.innerHTML = '<span style="color: var(--accent-rose);">Mohon lengkapi Username, Nama Repo, dan Token GitHub!</span>';
+            return;
+          }
+
+          saveGhConfig({ user, repo, branch, token });
+          btnCmsPublishNow.disabled = true;
+          cmsGhStatusMsg.innerHTML = '<span style="color: var(--accent-primary);">⏳ Menghubungkan ke GitHub REST API...</span>';
+
+          try {
+            const fileString = `/**\n * PORTFOLIO DATA CONFIGURATION: ERWIN ARDI NURCAHYO\n * Diperbarui via Admin Portal CMS pada: ${new Date().toLocaleString('id-ID')}\n */\n\nconst PORTFOLIO_DATA = ${JSON.stringify(CURRENT_STATE, null, 2)};\n\nwindow.PORTFOLIO_DATA = PORTFOLIO_DATA;\n`;
+            const base64Content = utf8ToBase64(fileString);
+
+            cmsGhStatusMsg.innerHTML = '<span style="color: var(--accent-primary);">⏳ Memeriksa berkas js/data.js di repositori...</span>';
+            let sha = null;
+            const getUrl = `https://api.github.com/repos/${user}/${repo}/contents/js/data.js?ref=${branch}`;
+
+            const getRes = await fetch(getUrl, {
+              headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            });
+
+            if (getRes.ok) {
+              const getData = await getRes.json();
+              sha = getData.sha;
+            }
+
+            cmsGhStatusMsg.innerHTML = '<span style="color: var(--accent-primary);">⏳ Mengunggah data & memperbarui GitHub Pages...</span>';
+            const putUrl = `https://api.github.com/repos/${user}/${repo}/contents/js/data.js`;
+            const putPayload = {
+              message: `Update portfolio content via Standalone Admin CMS (Erwin Ardi Nurcahyo)`,
+              content: base64Content,
+              branch: branch
+            };
+            if (sha) putPayload.sha = sha;
+
+            const putRes = await fetch(putUrl, {
+              method: 'PUT',
+              headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github.v3+json'
+              },
+              body: JSON.stringify(putPayload)
+            });
+
+            if (!putRes.ok) {
+              const errData = await putRes.json();
+              throw new Error(errData.message || 'Gagal menyimpan ke GitHub.');
+            }
+
+            cmsGhStatusMsg.innerHTML = '<span style="color: var(--accent-emerald);">🎉 BERHASIL! Seluruh perubahan foto, profil, dan berkas telah dipublikasikan ke GitHub. Dalam 30–60 detik, GitHub Pages akan otomatis menampilkan portofolio terbaru!</span>';
+            showToast('Publikasi ke GitHub sukses! Website live diperbarui.', 'success');
+          } catch (err) {
+            console.error('GitHub API Error:', err);
+            cmsGhStatusMsg.innerHTML = `<span style="color: var(--accent-rose);">❌ Gagal Publikasi: ${escapeHTML(err.message)}. Pastikan Token valid dan memiliki izin 'repo'.</span>`;
+          } finally {
+            btnCmsPublishNow.disabled = false;
+          }
+        });
+      }
+
+      if (btnCmsDownloadDatajs) {
+        btnCmsDownloadDatajs.addEventListener('click', () => {
+          const fileString = `/**\n * PORTFOLIO DATA CONFIGURATION: ERWIN ARDI NURCAHYO\n * Diperbarui via Admin Portal CMS pada: ${new Date().toLocaleString('id-ID')}\n */\n\nconst PORTFOLIO_DATA = ${JSON.stringify(CURRENT_STATE, null, 2)};\n\nwindow.PORTFOLIO_DATA = PORTFOLIO_DATA;\n`;
+          const blob = new Blob([fileString], { type: 'application/javascript;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'data.js';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast('File data.js berhasil diunduh.', 'success');
+        });
+      }
+
+      if (btnCmsResetAll) {
+        btnCmsResetAll.addEventListener('click', () => {
+          if (confirm('Kembalikan SELURUH profil, foto, pengalaman, dan dokumen ke versi bawaan CV asli Erwin Ardi Nurcahyo?')) {
+            localStorage.removeItem(STORAGE_KEY_STATE);
+            CURRENT_STATE = JSON.parse(JSON.stringify(MASTER_CV_DATA));
+            saveAppState(CURRENT_STATE);
+            populateCmsForms();
+            showToast('Seluruh data berhasil direset ke versi default CV asli!', 'info');
+          }
+        });
+      }
+
+      // 11. TOAST NOTIFIKASI
+      function showToast(message, type = 'info') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+
+        let iconSvg = '';
+        if (type === 'success') {
+          iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-emerald);"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+        } else if (type === 'error') {
+          iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-rose);"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
+        } else {
+          iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-primary);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
+        }
+
+        toast.innerHTML = `${iconSvg}<span>${escapeHTML(message)}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => toast.classList.add('show'), 10);
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+        }, 3500);
+      }
+
+      function escapeHTML(str) {
+        if (typeof str !== 'string') return str;
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+      }
+
+      // Inisialisasi Tampilan
+      updateAuthScreenView();
+    });
+  </script>
+</body>
+
+</html>

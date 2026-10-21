@@ -80,10 +80,10 @@ graph TD
 ================================================================================
 ZONA BAWAH: MASTER CONTEXT & LOGIKA SISTEM TERKINI (LIVING CONTEXT)
 ================================================================================
-- **Status Arsitektur Aktif:** Standalone All-in-One Web Application (HTML5 + Embedded Design System + Full In-Browser CMS Engine + GitHub REST API Sync Connector).
+- **Status Arsitektur Aktif:** Standalone Dual-Page Web Architecture (Portofolio Publik `index.html` + Dasbor CMS Mandiri `admin.html` di Tab Baru dengan Cross-Tab Real-time Storage Sync & GitHub REST API Sync Connector).
 - **Pemilik Portofolio:** Erwin Ardi Nurcahyo (Safety Officer & Operations Specialist).
 - **Format Data Aktif:** Structured Data di `js/data.js` & `localStorage['erwin_portfolio_master_v2']`.
-- **Logika Keamanan Aktif:** Admin Authentication, PIN Document Locker (DOC-EAN-007 IBPR), Privacy Redaction Preview Watermarking, Safe Client-Side GitHub Token Storage.
+- **Logika Keamanan Aktif:** Standalone Admin Authentication (`admin.html`), PIN Document Locker (DOC-EAN-003 IBPR), Privacy Redaction Preview Watermarking, Safe Client-Side GitHub Token Storage.
 - **Log Pembaruan Resmi:**
   - `v1.0.0` (Inisialisasi): Spesifikasi portofolio awal ZettBOT.
   - `v1.2.0` (Hotfix GitHub Pages): Penyatuan all-in-one CSS & JS ke dalam index.html untuk mengeliminasi 404.
@@ -94,4 +94,10 @@ ZONA BAWAH: MASTER CONTEXT & LOGIKA SISTEM TERKINI (LIVING CONTEXT)
     * Transformasi Portal Admin menjadi Dasbor CMS Multi-Tab lengkap (Profil & Foto, Pengalaman Kerja, Proyek STAR, Berkas & Dokumen, dan Publikasi GitHub).
     * Penambahan Uploader Foto Profil langsung dari galeri HP/laptop dengan kompresi visual otomatis.
     * Penambahan Lampiran Berkas Dokumen (PDF/Gambar) langsung dari perangkat.
-    * Integrasi 1-Klik Simpan & Publikasikan ke GitHub via GitHub REST API sehingga pengguna tidak perlu membuka kodingan di GitHub lagi.
+    * Integrasi 1-Klik Simpan & Publikasikan ke GitHub via GitHub REST API.
+  - `v2.2.0` (Pemisahan Portal Login & Dasbor CMS ke Tab Baru):
+    * Pemisahan alur admin dari modal overlay menjadi halaman mandiri berkelas `admin.html` yang terbuka di tab baru browser (`target="_blank"`).
+    * Layar login mandiri yang aman, bersih, dan dilengkapi fitur intip sandi.
+    * Dasbor CMS halaman penuh (*Full-Page Dashboard*) yang lapang, profesional, dan nyaman digunakan di PC maupun HP.
+    * Penambahan integrasi event listener `storage` pada `index.html` sehingga seluruh pengeditan di tab `admin.html` langsung tersinkronisasi otomatis secara real-time ke halaman portofolio tanpa perlu refresh manual.
+    * Tombol pintas `[🌐 Portofolio Live ↗]` di bilah atas `admin.html` untuk memudahkan pemilik beralih antar tab.
