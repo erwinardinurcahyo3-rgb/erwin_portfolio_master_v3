@@ -109,3 +109,7 @@ ZONA BAWAH: MASTER CONTEXT & LOGIKA SISTEM TERKINI (LIVING CONTEXT)
     * Pembaruan 3 riwayat karier lengkap dengan seluruh butir tanggung jawab resmi: Safety Officer PT ERM di site PT BIB, Admin Commercial PT Aviko di PT SSB, dan Staf Magang Pengarsipan & IT BPS Banjarmasin.
     * Restrukturisasi 7 kategori keahlian lengkap: Keselamatan Lapangan, Pelaporan K3, Data & Pelaporan (KNIME, Looker Studio), ERP SAP, IT & Web (PHP/MySQL), Desain, dan Soft Skills.
     * Pembaruan 7 sertifikasi resmi otentik dari LSP Telematika BNSP, FMS Miners Education, dan Pelatihan Internal PT Borneo Indobara (BIB).
+  - `v2.3.1` (Mekanisme Auto-Invalidasi Cache & Sinkronisasi 1-Klik GitHub):
+    * Penambahan penanda versi data (`dataVersion: '2.3.0'`) pada `js/data.js`, `admin.html`, dan `index.html`.
+    * Otomatisasi pembersihan cache usang browser (`localStorage['erwin_portfolio_master_v3']`) sehingga data CV baru langsung aktif tanpa terhalang cache lama.
+    * Penyempurnaan modul 1-Klik Publikasi GitHub REST API pada `admin.html` agar mengunggah dataset terbaru ke repositori.

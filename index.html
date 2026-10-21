@@ -3035,6 +3035,7 @@
     };
 
     // ==================== ENGINE STATE MANAGEMENT ====================
+    const DATA_VERSION = '2.3.0';
     const STORAGE_KEY_STATE = 'erwin_portfolio_master_v3';
     const STORAGE_KEY_ADMIN = 'erwin_portfolio_is_admin';
     const STORAGE_KEY_PASSWORD = 'erwin_portfolio_admin_password';
@@ -3044,15 +3045,25 @@
       const stored = localStorage.getItem(STORAGE_KEY_STATE);
       if (stored) {
         try {
-          return JSON.parse(stored);
+          const parsed = JSON.parse(stored);
+          if (parsed && parsed.dataVersion === DATA_VERSION) {
+            return parsed;
+          } else {
+            console.log('Cache versi lama terdeteksi di index, menyinkronkan data CV resmi v2.3.0...');
+            localStorage.removeItem(STORAGE_KEY_STATE);
+          }
         } catch (e) {
           console.error('Error parsing stored app state:', e);
         }
       }
-      return JSON.parse(JSON.stringify(window.PORTFOLIO_DATA || MASTER_CV_DATA));
+      const defaultState = JSON.parse(JSON.stringify(window.PORTFOLIO_DATA || MASTER_CV_DATA));
+      defaultState.dataVersion = DATA_VERSION;
+      saveAppState(defaultState);
+      return defaultState;
     }
 
     function saveAppState(state) {
+      state.dataVersion = DATA_VERSION;
       localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(state));
       CURRENT_STATE = state;
     }

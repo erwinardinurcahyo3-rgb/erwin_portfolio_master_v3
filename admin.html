@@ -5,10 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dasbor Pengelola Portofolio (CMS) - Erwin Ardi Nurcahyo</title>
-  <meta name="description" content="Portal Pengelola dan Dasbor CMS Mandiri Portofolio Profesional Erwin Ardi Nurcahyo.">
+  <meta name="description"
+    content="Portal Pengelola dan Dasbor CMS Mandiri Portofolio Profesional Erwin Ardi Nurcahyo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
 
   <style>
     /* ==========================================================================
@@ -119,7 +122,9 @@
       outline: none;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       font-family: inherit;
       font-size: 0.9375rem;
     }
@@ -389,7 +394,9 @@
       align-items: center;
     }
 
-    .form-input, .form-textarea, .form-select {
+    .form-input,
+    .form-textarea,
+    .form-select {
       width: 100%;
       padding: 0.65rem 0.875rem;
       background-color: var(--bg-primary);
@@ -400,7 +407,9 @@
       transition: all var(--transition-fast);
     }
 
-    .form-input:focus, .form-textarea:focus, .form-select:focus {
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
       outline: none;
       border-color: var(--border-focus);
       box-shadow: 0 0 0 3px var(--accent-light);
@@ -613,7 +622,8 @@
       margin-top: 0.75rem;
     }
 
-    .cms-list-table th, .cms-list-table td {
+    .cms-list-table th,
+    .cms-list-table td {
       padding: 0.75rem 0.875rem;
       text-align: left;
       border-bottom: 1px solid var(--border-color);
@@ -682,13 +692,27 @@
 
     /* Animasi */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes fadeInScale {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .shake {
@@ -696,10 +720,27 @@
     }
 
     @keyframes shakeKeyframes {
-      10%, 90% { transform: translate3d(-1px, 0, 0); }
-      20%, 80% { transform: translate3d(2px, 0, 0); }
-      30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
-      40%, 60% { transform: translate3d(3px, 0, 0); }
+
+      10%,
+      90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+
+      20%,
+      80% {
+        transform: translate3d(2px, 0, 0);
+      }
+
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-3px, 0, 0);
+      }
+
+      40%,
+      60% {
+        transform: translate3d(3px, 0, 0);
+      }
     }
   </style>
 </head>
@@ -711,7 +752,8 @@
     <div class="navbar-inner">
       <div class="brand-group">
         <div class="brand-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
@@ -728,10 +770,12 @@
       <div class="nav-actions">
         <!-- Sakelar Tema Gelap/Terang -->
         <button type="button" class="btn-icon" id="theme-toggle" title="Ganti Tema Gelap / Terang">
-          <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
-          <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -745,8 +789,10 @@
         </button>
 
         <!-- Tombol Lihat Portofolio Live -->
-        <a href="index.html" class="btn btn-secondary btn-sm" id="btn-view-live-portfolio" target="_blank" rel="noopener noreferrer" title="Buka Halaman Portofolio Utama di Tab Baru">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <a href="index.html" class="btn btn-secondary btn-sm" id="btn-view-live-portfolio" target="_blank"
+          rel="noopener noreferrer" title="Buka Halaman Portofolio Utama di Tab Baru">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="2" y1="12" x2="22" y2="12"></line>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
@@ -755,8 +801,10 @@
         </a>
 
         <!-- Tombol Logout (Muncul saat login) -->
-        <button type="button" class="btn btn-danger btn-sm" id="btn-top-logout" style="display: none;" title="Keluar dari mode pengelola">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" class="btn btn-danger btn-sm" id="btn-top-logout" style="display: none;"
+          title="Keluar dari mode pengelola">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
             <polyline points="16 17 21 12 16 7"></polyline>
             <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -772,14 +820,16 @@
     <div class="auth-card" id="auth-card">
       <div class="auth-header">
         <div class="auth-icon-badge">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
         </div>
         <h1 class="auth-title">Portal Masuk Pengelola</h1>
         <p class="auth-desc">
-          Masukkan kata sandi pengelola untuk membuka Dasbor CMS dan memperbarui foto, riwayat kerja, proyek, serta berkas sertifikat Anda.
+          Masukkan kata sandi pengelola untuk membuka Dasbor CMS dan memperbarui foto, riwayat kerja, proyek, serta
+          berkas sertifikat Anda.
         </p>
       </div>
 
@@ -787,9 +837,11 @@
         <div class="form-group">
           <label for="admin-pass-input" class="form-label">Kata Sandi Pengelola</label>
           <div class="input-pass-wrapper">
-            <input type="password" id="admin-pass-input" class="form-input" placeholder="Masukkan kata sandi..." required autocomplete="current-password" autofocus>
+            <input type="password" id="admin-pass-input" class="form-input" placeholder="Masukkan kata sandi..."
+              required autocomplete="current-password" autofocus>
             <button type="button" class="btn-toggle-pass" id="btn-toggle-pass" title="Tampilkan / Sembunyikan sandi">
-              <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
               </svg>
@@ -801,12 +853,13 @@
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
             <span>Masuk ke Dasbor Pengelola</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
-          
+
           <a href="index.html" class="btn btn-secondary" style="width: 100%;">
             <span>← Kembali ke Portofolio Utama</span>
           </a>
@@ -875,11 +928,13 @@
           <div style="flex-grow: 1;">
             <label class="form-label">Ganti Foto Profil Anda</label>
             <p style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 0.65rem;">
-              Pilih foto baru dari galeri HP atau laptop. Sistem otomatis mengompresi dan menyesuaikan rasio secara profesional.
+              Pilih foto baru dari galeri HP atau laptop. Sistem otomatis mengompresi dan menyesuaikan rasio secara
+              profesional.
             </p>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
               <input type="file" id="cms-avatar-file-input" accept="image/*" style="display: none;">
-              <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('cms-avatar-file-input').click();">
+              <button type="button" class="btn btn-secondary btn-sm"
+                onclick="document.getElementById('cms-avatar-file-input').click();">
                 📁 Pilih Foto dari Perangkat
               </button>
               <button type="button" class="btn btn-secondary btn-sm" id="btn-cms-avatar-url-prompt">
@@ -951,7 +1006,8 @@
 
     <!-- ========== TAB 2: PENGALAMAN KERJA ========== -->
     <div class="cms-tab-pane" id="tab-pengalaman">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
         <h3 style="font-size: 1.125rem; font-weight: 800;">Daftar Riwayat Karier & Lapangan</h3>
         <button type="button" class="btn btn-primary btn-sm" id="btn-cms-add-exp">
           + Tambah Pengalaman Baru
@@ -975,8 +1031,10 @@
       </div>
 
       <!-- FORM TAMBAH / EDIT PENGALAMAN -->
-      <div id="cms-exp-form-box" style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
-        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-exp-form-title">Tambah Pengalaman</h4>
+      <div id="cms-exp-form-box"
+        style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
+        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-exp-form-title">Tambah Pengalaman
+        </h4>
         <form id="cms-exp-form">
           <input type="hidden" id="cms-exp-index" value="-1">
 
@@ -994,7 +1052,8 @@
           <div class="form-row">
             <div class="form-group">
               <label for="cms-exp-period" class="form-label">Periode Kerja *</label>
-              <input type="text" id="cms-exp-period" class="form-input" placeholder="contoh: Dec 2025 – Sekarang" required>
+              <input type="text" id="cms-exp-period" class="form-input" placeholder="contoh: Dec 2025 – Sekarang"
+                required>
             </div>
             <div class="form-group">
               <label for="cms-exp-location" class="form-label">Lokasi</label>
@@ -1008,8 +1067,10 @@
           </div>
 
           <div class="form-group">
-            <label for="cms-exp-highlights" class="form-label">Poin-Poin Pencapaian / Highlights (Satu per baris)</label>
-            <textarea id="cms-exp-highlights" class="form-textarea" placeholder="Poin 1&#10;Poin 2&#10;Poin 3"></textarea>
+            <label for="cms-exp-highlights" class="form-label">Poin-Poin Pencapaian / Highlights (Satu per
+              baris)</label>
+            <textarea id="cms-exp-highlights" class="form-textarea"
+              placeholder="Poin 1&#10;Poin 2&#10;Poin 3"></textarea>
           </div>
 
           <div class="form-group">
@@ -1027,7 +1088,8 @@
 
     <!-- ========== TAB 3: PROYEK STAR ========== -->
     <div class="cms-tab-pane" id="tab-proyek">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
         <h3 style="font-size: 1.125rem; font-weight: 800;">Daftar Proyek Unggulan (Metode STAR)</h3>
         <button type="button" class="btn btn-primary btn-sm" id="btn-cms-add-proj">
           + Tambah Proyek Baru
@@ -1051,7 +1113,8 @@
       </div>
 
       <!-- FORM TAMBAH / EDIT PROYEK -->
-      <div id="cms-proj-form-box" style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
+      <div id="cms-proj-form-box"
+        style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
         <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-proj-form-title">Tambah Proyek</h4>
         <form id="cms-proj-form">
           <input type="hidden" id="cms-proj-index" value="-1">
@@ -1107,7 +1170,8 @@
 
     <!-- ========== TAB 4: BERKAS & SERTIFIKAT ========== -->
     <div class="cms-tab-pane" id="tab-dokumen">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
         <h3 style="font-size: 1.125rem; font-weight: 800;">Daftar Berkas, Sertifikat & Ijazah</h3>
         <button type="button" class="btn btn-primary btn-sm" id="btn-cms-add-doc">
           + Tambah Berkas Baru
@@ -1132,8 +1196,10 @@
       </div>
 
       <!-- FORM TAMBAH / EDIT DOKUMEN -->
-      <div id="cms-doc-form-box" style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
-        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-doc-form-title">Tambah Berkas Dokumen</h4>
+      <div id="cms-doc-form-box"
+        style="display: none; background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
+        <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 1rem;" id="cms-doc-form-title">Tambah Berkas
+          Dokumen</h4>
         <form id="cms-doc-form">
           <input type="hidden" id="cms-doc-id" value="">
 
@@ -1193,14 +1259,17 @@
           </div>
 
           <!-- UPLOAD FILE SERTIFIKAT DARI HP/LAPTOP -->
-          <div class="form-group" style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px dashed var(--border-color);">
+          <div class="form-group"
+            style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px dashed var(--border-color);">
             <label class="form-label">Lampirkan Salinan Dokumen Asli (PDF atau Foto dari HP/Laptop)</label>
             <input type="file" id="cms-doc-file-input" accept=".pdf,image/*" style="display: none;">
             <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-              <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('cms-doc-file-input').click();">
+              <button type="button" class="btn btn-secondary btn-sm"
+                onclick="document.getElementById('cms-doc-file-input').click();">
                 📁 Pilih File dari Perangkat
               </button>
-              <span id="cms-doc-file-label" style="font-size: 0.8125rem; color: var(--text-muted);">Belum ada berkas baru dipilih (menggunakan template standar)</span>
+              <span id="cms-doc-file-label" style="font-size: 0.8125rem; color: var(--text-muted);">Belum ada berkas
+                baru dipilih (menggunakan template standar)</span>
             </div>
           </div>
 
@@ -1209,15 +1278,18 @@
             <textarea id="cms-doc-desc" class="form-textarea" style="min-height: 70px;"></textarea>
           </div>
 
-          <div class="form-group" style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.875rem; font-weight: 600;">
+          <div class="form-group"
+            style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <label
+              style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.875rem; font-weight: 600;">
               <input type="checkbox" id="cms-doc-is-protected" style="width: 18px; height: 18px;">
               <span>Kunci dokumen ini dengan 4-digit PIN rahasia</span>
             </label>
 
             <div id="cms-doc-pin-wrapper" style="display: none; margin-top: 0.75rem;">
               <label for="cms-doc-pin" class="form-label">Kode PIN 4-Angka</label>
-              <input type="text" id="cms-doc-pin" class="form-input" maxlength="4" placeholder="1234" style="max-width: 140px; font-weight: 700; letter-spacing: 0.2em; text-align: center;">
+              <input type="text" id="cms-doc-pin" class="form-input" maxlength="4" placeholder="1234"
+                style="max-width: 140px; font-weight: 700; letter-spacing: 0.2em; text-align: center;">
             </div>
           </div>
 
@@ -1231,11 +1303,16 @@
 
     <!-- ========== TAB 5: PUBLIKASIKAN KE GITHUB ========== -->
     <div class="cms-tab-pane" id="tab-github">
-      <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-lg); border: 1.5px solid var(--accent-primary); margin-bottom: 1.5rem;">
+      <div
+        style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-lg); border: 1.5px solid var(--accent-primary); margin-bottom: 1.5rem;">
         <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-light); color: var(--accent-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          <div
+            style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-light); color: var(--accent-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+              </path>
             </svg>
           </div>
           <div>
@@ -1243,7 +1320,9 @@
               1-Klik Simpan & Publikasikan ke GitHub Pages
             </h4>
             <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">
-              Dengan integrasi REST API ini, seluruh pembaruan foto, teks profil, riwayat kerja, dan dokumen yang Anda simpan di sini akan langsung di-commit ke repositori GitHub Anda. Portofolio live Anda akan otomatis ter-update tanpa perlu membuka kodingan lagi.
+              Dengan integrasi REST API ini, seluruh pembaruan foto, teks profil, riwayat kerja, dan dokumen yang Anda
+              simpan di sini akan langsung di-commit ke repositori GitHub Anda. Portofolio live Anda akan otomatis
+              ter-update tanpa perlu membuka kodingan lagi.
             </p>
           </div>
         </div>
@@ -1268,22 +1347,28 @@
           </div>
           <div class="form-group">
             <label for="cms-gh-token" class="form-label">GitHub Personal Access Token (PAT) *</label>
-            <input type="password" id="cms-gh-token" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" required autocomplete="off">
+            <input type="password" id="cms-gh-token" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" required
+              autocomplete="off">
           </div>
         </div>
 
-        <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        <div
+          style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 1.5rem;">
           <strong>💡 Cara Membuat Token GitHub (Hanya 1 Menit & Gratis):</strong><br>
           1. Buka akun GitHub Anda ➔ Klik foto profil di pojok kanan atas ➔ <em>Settings</em>.<br>
-          2. Gulir ke paling bawah ➔ Klik <em>Developer Settings</em> ➔ <em>Personal access tokens</em> ➔ <em>Tokens (classic)</em>.<br>
-          3. Klik <em>Generate new token (classic)</em> ➔ Centang izin <strong>repo</strong> ➔ Klik <em>Generate</em> ➔ Salin kodenya ke kotak di atas.
+          2. Gulir ke paling bawah ➔ Klik <em>Developer Settings</em> ➔ <em>Personal access tokens</em> ➔ <em>Tokens
+            (classic)</em>.<br>
+          3. Klik <em>Generate new token (classic)</em> ➔ Centang izin <strong>repo</strong> ➔ Klik <em>Generate</em> ➔
+          Salin kodenya ke kotak di atas.
         </div>
 
-        <div id="cms-gh-status-msg" style="margin-bottom: 1rem; font-size: 0.875rem; font-weight: 600; min-height: 20px;"></div>
+        <div id="cms-gh-status-msg"
+          style="margin-bottom: 1rem; font-size: 0.875rem; font-weight: 600; min-height: 20px;"></div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <button type="submit" class="btn btn-success" id="btn-cms-publish-now" style="flex: 1;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <polyline points="16 16 12 12 8 16"></polyline>
               <line x1="12" y1="12" x2="12" y2="21"></line>
               <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
@@ -1475,6 +1560,7 @@
     };
 
     // ==================== STATE MANAGEMENT CONSTANTS ====================
+    const DATA_VERSION = '2.3.0';
     const STORAGE_KEY_STATE = 'erwin_portfolio_master_v3';
     const STORAGE_KEY_ADMIN = 'erwin_portfolio_is_admin';
     const STORAGE_KEY_PASSWORD = 'erwin_portfolio_admin_password';
@@ -1484,15 +1570,25 @@
       const stored = localStorage.getItem(STORAGE_KEY_STATE);
       if (stored) {
         try {
-          return JSON.parse(stored);
+          const parsed = JSON.parse(stored);
+          if (parsed && parsed.dataVersion === DATA_VERSION) {
+            return parsed;
+          } else {
+            console.log('Cache versi lama terdeteksi di admin, menyinkronkan data CV resmi v2.3.0...');
+            localStorage.removeItem(STORAGE_KEY_STATE);
+          }
         } catch (e) {
           console.error('Error parsing stored app state:', e);
         }
       }
-      return JSON.parse(JSON.stringify(window.PORTFOLIO_DATA || MASTER_CV_DATA));
+      const defaultState = JSON.parse(JSON.stringify(window.PORTFOLIO_DATA || MASTER_CV_DATA));
+      defaultState.dataVersion = DATA_VERSION;
+      saveAppState(defaultState);
+      return defaultState;
     }
 
     function saveAppState(state) {
+      state.dataVersion = DATA_VERSION;
       localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(state));
       CURRENT_STATE = state;
       updateStatsCounters();
@@ -1505,9 +1601,9 @@
     function loadGhConfig() {
       const stored = localStorage.getItem(STORAGE_KEY_GH);
       if (stored) {
-        try { return JSON.parse(stored); } catch (e) {}
+        try { return JSON.parse(stored); } catch (e) { }
       }
-      return { user: '', repo: 'Portofolio', branch: 'main', token: '' };
+      return { user: 'erwinardinurcahyo3-rgb', repo: 'erwin_portfolio_master_v3', branch: 'main', token: '' };
     }
 
     function saveGhConfig(cfg) {
@@ -1695,9 +1791,9 @@
           if (!file) return;
 
           const reader = new FileReader();
-          reader.onload = function(evt) {
+          reader.onload = function (evt) {
             const tempImg = new Image();
-            tempImg.onload = function() {
+            tempImg.onload = function () {
               const canvas = document.createElement('canvas');
               const maxDim = 800;
               let width = tempImg.width;
@@ -1795,7 +1891,7 @@
         `).join('');
       }
 
-      window.editCmsExpItem = function(idx) {
+      window.editCmsExpItem = function (idx) {
         const exp = CURRENT_STATE.experience[idx];
         if (!exp) return;
 
@@ -1813,7 +1909,7 @@
         cmsExpFormBox.scrollIntoView({ behavior: 'smooth' });
       };
 
-      window.deleteCmsExpItem = function(idx) {
+      window.deleteCmsExpItem = function (idx) {
         const exp = CURRENT_STATE.experience[idx];
         if (!exp) return;
         if (confirm(`Hapus pengalaman "${exp.role} di ${exp.company}"?`)) {
@@ -1892,7 +1988,7 @@
         `).join('');
       }
 
-      window.editCmsProjItem = function(idx) {
+      window.editCmsProjItem = function (idx) {
         const prj = CURRENT_STATE.projects[idx];
         if (!prj) return;
 
@@ -1913,7 +2009,7 @@
         cmsProjFormBox.scrollIntoView({ behavior: 'smooth' });
       };
 
-      window.deleteCmsProjItem = function(idx) {
+      window.deleteCmsProjItem = function (idx) {
         const prj = CURRENT_STATE.projects[idx];
         if (!prj) return;
         if (confirm(`Hapus proyek "${prj.title}"?`)) {
@@ -2013,7 +2109,7 @@
           document.getElementById('cms-doc-filename').value = file.name;
 
           const reader = new FileReader();
-          reader.onload = function(evt) {
+          reader.onload = function (evt) {
             currentDocUploadedDataUrl = evt.target.result;
             showToast(`Berkas "${file.name}" siap dilampirkan.`, 'info');
           };
@@ -2027,7 +2123,7 @@
         });
       }
 
-      window.editCmsDocItem = function(docId) {
+      window.editCmsDocItem = function (docId) {
         const doc = (CURRENT_STATE.documents || []).find(d => d.id === docId);
         if (!doc) return;
 
@@ -2053,7 +2149,7 @@
         cmsDocFormBox.scrollIntoView({ behavior: 'smooth' });
       };
 
-      window.deleteCmsDocItem = function(docId) {
+      window.deleteCmsDocItem = function (docId) {
         const doc = (CURRENT_STATE.documents || []).find(d => d.id === docId);
         if (!doc) return;
         if (confirm(`Apakah Anda yakin ingin menghapus berkas "${doc.title}"?`)) {
@@ -2226,9 +2322,10 @@
           if (confirm('Kembalikan SELURUH profil, foto, pengalaman, dan dokumen ke versi bawaan CV asli Erwin Ardi Nurcahyo?')) {
             localStorage.removeItem(STORAGE_KEY_STATE);
             CURRENT_STATE = JSON.parse(JSON.stringify(window.PORTFOLIO_DATA || MASTER_CV_DATA));
+            CURRENT_STATE.dataVersion = DATA_VERSION;
             saveAppState(CURRENT_STATE);
             populateCmsForms();
-            showToast('Seluruh data berhasil direset ke versi default CV asli!', 'info');
+            showToast('Seluruh data berhasil disinkronkan ke versi default CV asli v2.3.0!', 'info');
           }
         });
       }
